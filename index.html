@@ -72,10 +72,11 @@ input[type=search],input[type=text],textarea,select{width:100%;border:1.5px soli
 .qdial{position:relative;width:200px;height:200px;border-radius:50%;border:3px solid var(--g);margin:10px auto}.qdial .qn{position:absolute;top:4px;left:50%;transform:translateX(-50%);font-weight:700;color:var(--mut)}
 .qarrow{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;font-size:60px;color:var(--gold);line-height:1;padding-top:22px;transition:transform .2s}
 select,input[type=number]{font:inherit;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.ctr{padding:10px 0;border-bottom:1px solid var(--line)}.ctr:last-child{border:0}.ctr.done .bar i{background:var(--gold)}.ctt{border-collapse:collapse;font-size:13px;width:100%}.ctt th,.ctt td{border:1px solid var(--line);padding:4px 6px;text-align:center}.ctt td:first-child{text-align:left;white-space:nowrap}
 footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 16px 110px}
 </style></head><body>
 <header><div class="hd"><a class="logo" href="#/"><svg viewBox="0 0 100 100"><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#e8c766"/><path d="M70 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#e8c766"/></svg>İslam</a><span class="sp"></span><button class="tm" id="lg" title="Dil / Тил"></button><button class="tm" id="tm" title="Tema">🌙</button></div>
-<nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kitaplar" data-r="kitaplar">📚 Kitaplar</a><a href="#/dinle" data-r="dinle">🎧 Dinle</a><a href="#/yazilar" data-r="yazilar">✍️ Yazılar</a><a href="#/dualar" data-r="dualar">🤲 Dualar</a><a href="#/ozel" data-r="ozel">⭐ Özel</a><a href="#/namaz" data-r="namaz">🕌 Namaz</a><a href="#/men" data-r="men">👤 Ben</a><a href="#/zikirmatik" data-r="zikirmatik">📿 Zikirmatik</a></nav></header>
+<nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kitaplar" data-r="kitaplar">📚 Kitaplar</a><a href="#/dinle" data-r="dinle">🎧 Dinle</a><a href="#/yazilar" data-r="yazilar">✍️ Yazılar</a><a href="#/dualar" data-r="dualar">🤲 Dualar</a><a href="#/ozel" data-r="ozel">⭐ Özel</a><a href="#/namaz" data-r="namaz">🕌 Namaz</a><a href="#/cetele" data-r="cetele">📝 Çetele</a><a href="#/men" data-r="men">👤 Ben</a><a href="#/zikirmatik" data-r="zikirmatik">📿 Zikirmatik</a></nav></header>
 <main id="app"></main>
 <footer><span id="ft"></span> · <span id="yr"></span></footer>
 <div class="player" id="pl" hidden><div class="in"><div class="row" style="justify-content:space-between;margin-bottom:4px"><b id="pt" style="font-size:14px"></b><span class="row"><select id="ps" style="width:auto;padding:4px 8px"><option value=".75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><button class="chip" id="pn">⏭</button><button class="chip" id="px">✕</button></span></div><audio id="au" controls preload="none"></audio></div></div>
@@ -127,7 +128,7 @@ function load(n){if(DATA[n])return Promise.resolve(DATA[n]);return fetch('data/'
 function home(){app.innerHTML='';
  var hp=h('div');app.append(h('h1',null,tx('bism')),h('p',{class:'lead'},tx('homelead')),hp);homePanel(hp);
  var g=h('div',{class:'grid'});
- [['📚',tx('t1'),tx('d1'),'#/kitaplar'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['🤲',tx('t5'),tx('d5'),'#/dualar'],['⭐',tx('t6'),tx('d6'),'#/ozel'],['🕌',tx('t7'),tx('d7'),'#/namaz'],['👤',tx('t8'),tx('d8'),'#/men'],['📿',tx('t4'),tx('d4'),'#/zikirmatik']].forEach(function(x){
+ [['📚',tx('t1'),tx('d1'),'#/kitaplar'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['🤲',tx('t5'),tx('d5'),'#/dualar'],['⭐',tx('t6'),tx('d6'),'#/ozel'],['🕌',tx('t7'),tx('d7'),'#/namaz'],['📝',tx('t9'),tx('d9'),'#/cetele'],['👤',tx('t8'),tx('d8'),'#/men'],['📿',tx('t4'),tx('d4'),'#/zikirmatik']].forEach(function(x){
   g.append(h('a',{class:'card tile',href:x[3]},[h('div',{class:'ic'},x[0]),h('b',null,x[1]),h('span',null,x[2])]))});
  app.append(g);
  load('posts').then(function(P){if(!P.length)return;app.append(h('h2',null,tx('recent')));P.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,3).forEach(function(p){app.append(postCard(p))})})}
@@ -367,6 +368,69 @@ function homePanel(box){var n=nextPrayer(),L0=curLoc(),dn=Math.floor(Date.now()/
  var last=ls('qlast');if(last)qIndex().then(function(I){box.insertBefore(h('a',{class:'btn g',href:'#/kuran/'+last+(ls('qla')?'/'+ls('qla'):''),style:'margin:0 0 12px;display:block;text-align:center'},tx('cont2')+': '+I[lang][last-1]),np.nextSibling)});
  var da=DAYAY[dn%DAYAY.length];Promise.all([qIndex(),qSura(da[0])]).then(function(x){var I=x[0],S=x[1];box.append(h('div',{class:'card dua'},[h('div',{class:'ref'},tx('dayay')+' · '+I[lang][da[0]-1]+' '+da[0]+':'+da[1]),h('p',{class:'ar sm'},S.a[da[1]-1]),h('p',{class:'vtr',style:'display:block'},S[lang][da[1]-1]),h('a',{class:'chip',href:'#/kuran/'+da[0]+'/'+da[1],style:'text-decoration:none;display:inline-block'},'→')]))});
  load('duas').then(function(P){var all=[];P.forEach(function(p){p.items.forEach(function(it){all.push(it)})});if(!all.length)return;var it=all[dn%all.length];qIndex().then(function(I){box.append(h('div',{class:'card dua'},[h('div',{class:'ref'},tx('daydua')+' · '+I[lang][it.s-1]+' '+it.s+':'+it.a1),h('p',{class:'ar sm'},it.ar),h('p',{class:'vtr',style:'display:block'},it[lang])]))})})}
+/* ====== Çetele ====== */
+Object.assign(L.tr,{t9:'Çetele',d9:'Günlük/haftalık ibadet çetelesi, Google Tabloya otomatik yazar',
+ ct_h:'Çetele',ct_wk:'Hafta',ct_goal:'Hedef',ct_day:'Günlük',ct_save:'💾 Kaydet ve tabloya gönder',ct_pre:'📥 Siteden al',ct_prn:'Bugünkü okuma: {a} ayet · dinleme: {m} dk → KK ve Dinleme alanlarına yazıldı.',
+ ct_sent:'Tabloya yazıldı ✓',ct_pend:'Kaydedildi (tablo bağlantısı yok/hata). Daha sonra tekrar gönderilecek.',ct_tot:'Puan',ct_sum:'Haftalık özet',ct_chk:'Tamamlandı (hafta içinde)',
+ ct_set:'⚙️ Google Tablo bağlantısı',ct_url:'Apps Script web adresi',ct_key:'Gizli anahtar',ct_sheet:'Sekme adı (boşsa bağlantıdaki sekme)',ct_person:'Tablodaki bloğunuz',ct_ratio:'Kaç ayet = 1 KK',ct_test:'Bağlantıyı dene',ct_ok:'Bağlantı tamam ✓',ct_bad:'Bağlantı kurulamadı veya anahtar yanlış',ct_copy:'📋 Script kodunu kopyala',
+ ct_mm:'Tablodaki tarih uyuşmuyor ({d}). Yanlış hafta sekmesi olabilir; sekme adını ayarlardan değiştirin.',ct_err:{'bad-key':'Gizli anahtar yanlış','no-sheet':'Sekme bulunamadı','no-person':'Tabloda bu ad bulunamadı','no-day':'Gün satırı bulunamadı'},
+ ct_help:['1) script.new adresini açın (kendi Google hesabınızla), kodu yapıştırın.','2) KEY satırına kendi gizli kelimenizi yazın.','3) Dağıt → Yeni dağıtım → Web uygulaması: “Şu kullanıcı olarak çalıştır: Ben”, “Erişim: Herkes”. İzin verin.','4) Çıkan web adresini ve aynı gizli kelimeyi aşağıya girin, “Bağlantıyı dene”.'],
+ nav:['Ana sayfa','📚 Kitaplar','🎧 Dinle','✍️ Yazılar','🤲 Dualar','⭐ Özel','🕌 Namaz','📝 Çetele','👤 Ben','📿 Zikirmatik']});
+Object.assign(L.kg,{t9:'Ибадат эсеби',d9:'Күндүк/жумалык ибадат эсеби, Google таблицага автоматтык жазылат',
+ ct_h:'Ибадат эсеби (çetele)',ct_wk:'Жума',ct_goal:'Максат',ct_day:'Күнүнө',ct_save:'💾 Сактоо жана таблицага жөнөтүү',ct_pre:'📥 Сайттан алуу',ct_prn:'Бүгүнкү окуу: {a} аят · угуу: {m} мүн → KK жана Dinleme талааларына жазылды.',
+ ct_sent:'Таблицага жазылды ✓',ct_pend:'Сакталды (таблица менен байланыш жок/ката). Кийин кайра жөнөтүлөт.',ct_tot:'Упай',ct_sum:'Жумалык жыйынтык',ct_chk:'Аткарылды (жума ичинде)',
+ ct_set:'⚙️ Google таблица менен байланыш',ct_url:'Apps Script веб дареги',ct_key:'Жашыруун ачкыч',ct_sheet:'Барак аты (бош болсо шилтемедеги барак)',ct_person:'Таблицадагы блогуңуз',ct_ratio:'Канча аят = 1 KK',ct_test:'Байланышты текшерүү',ct_ok:'Байланыш бар ✓',ct_bad:'Байланыш түзүлгөн жок же ачкыч туура эмес',ct_copy:'📋 Скрипт кодун көчүрүү',
+ ct_mm:'Таблицадагы дата дал келген жок ({d}). Башка жуманын барагы болушу мүмкүн; барак атын жөндөөдөн өзгөртүңүз.',ct_err:{'bad-key':'Жашыруун ачкыч туура эмес','no-sheet':'Барак табылган жок','no-person':'Таблицада бул ат табылган жок','no-day':'Күндүн сабы табылган жок'},
+ ct_help:['1) script.new ачыңыз (өз Google аккаунтуңуз менен), кодду коюңуз.','2) KEY сабына өз жашыруун сөзүңүздү жазыңыз.','3) Deploy → New deployment → Web app: «Execute as: Me», «Who has access: Anyone». Уруксат бериңиз.','4) Чыккан веб даректи жана ошол эле жашыруун сөздү төмөнкүгө киргизиңиз, «Байланышты текшерүү» басыңыз.'],
+ nav:['Башкы бет','📚 Китептер','🎧 Угуу','✍️ Макалалар','🤲 Дубалар','⭐ Атайын','🕌 Намаз','📝 Эсеп','👤 Менин','📿 Зикирматик']});
+var CT_NUM=[['KK',3],['Ris',3],['Pır',3],['Okuma kitap',10],['Cevşen',25],['Tesbihat',5],['Dinleme',15],['Teheccüt',1],['Duha',1],['Evvabin',1],['Hacet',1],['Kaza',5],['Oruç (Week)',2,1],['Meal',3]],
+ CT_CHK=['Teheccüd','Fetih','Yasin','Mülk','Kehf','Enbiya 81-94','Tevhidname'];
+function ymd(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function pd(s){var p=s.split('-');return new Date(+p[0],p[1]-1,+p[2])}
+function wd(d){return (d.getDay()+6)%7+1}
+function dmS(d){return d.getDate()+'.'+(d.getMonth()+1)}
+function ctSend(date,store){var S=ls('ctset')||{};if(!S.url)return Promise.resolve({ok:false,error:'no-url'});var D=store.days[date]||{v:{},c:{}},d=pd(date),pay={key:S.key,sheet:S.sheet||'',person:S.person||'Name 3',weekday:wd(d),dm:dmS(d),values:D.v,checks:{}};
+ CT_CHK.forEach(function(k){pay.checks[k]=!!D.c[k]});
+ return fetch(S.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(pay)}).then(function(r){return r.json()}).catch(function(){return{ok:false,error:'net'}})}
+/* dinleme süresi takibi */
+(function(){function tr(a){var prev=0,acc=0;function flush(){if(acc>0){var o=ls('lis')||{},t=today();o[t]=(o[t]||0)+acc;ls('lis',o);acc=0}}
+ a.addEventListener('timeupdate',function(){var d=a.currentTime-prev;prev=a.currentTime;if(d>0&&d<2){acc+=d;if(acc>15)flush()}});a.addEventListener('seeked',function(){prev=a.currentTime});a.addEventListener('pause',flush);a.addEventListener('ended',flush);a.addEventListener('play',function(){prev=a.currentTime})}
+ tr(QA);var au=document.getElementById('au');if(au)tr(au)})();
+function cetele(){app.innerHTML='';var sel=ls('ctsel')||today(),ST=ls('ct')||{days:{}},GO=ls('ctgoal')||{};ls('ctsel',null);
+ var d=pd(sel),mon=new Date(d);mon.setDate(d.getDate()-(wd(d)-1));var wk=[];for(var i=0;i<7;i++){var x=new Date(mon);x.setDate(mon.getDate()+i);wk.push(ymd(x))}
+ var D=ST.days[sel]=ST.days[sel]||{v:{},c:{}};
+ app.append(h('h1',null,tx('ct_h')));
+ app.append(h('div',{class:'row',style:'justify-content:space-between;margin-bottom:8px'},[h('button',{class:'btn o',onclick:function(){var x=pd(sel);x.setDate(x.getDate()-1);ls('ctsel',ymd(x));cetele()}},'‹'),h('b',null,dmS(d)+' · '+['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'][wd(d)-1]+(sel===today()?' · '+tx('today'):'')),h('button',{class:'btn o',onclick:function(){var x=pd(sel);x.setDate(x.getDate()+1);ls('ctsel',ymd(x));cetele()}},'›')]));
+ var inputs={},card=h('div',{class:'card'});app.append(card);
+ function wsum(k){var s=0;wk.forEach(function(dd){var v=(ST.days[dd]||{v:{}}).v[k];s+=+v||0});return s}
+ function tgt(r){return GO[r[0]]!=null?GO[r[0]]:(r[2]?r[1]:r[1]*7)}
+ function refresh(){var tot=0;CT_NUM.forEach(function(r){tot+=+D.v[r[0]]||0});totEl.textContent=tx('ct_tot')+': '+tot;
+  CT_NUM.forEach(function(r){var w=wsum(r[0]),t=tgt(r),el=bars[r[0]];el.firstChild.style.width=Math.min(100,w/t*100)+'%';el.nextSibling.textContent=w+' / '+t;el.parentNode.classList.toggle('done',w>=t)})}
+ var bars={},totEl=h('b',{style:'color:var(--g)'});
+ CT_NUM.forEach(function(r){var k=r[0],inp=h('input',{type:'number',min:0,step:'any',value:D.v[k]!=null?D.v[k]:'',style:'width:78px;text-align:center'});inputs[k]=inp;
+  inp.oninput=function(){D.v[k]=inp.value===''?null:+inp.value;refresh()};
+  function bump(n){inp.value=Math.max(0,(+inp.value||0)+n);inp.oninput()}
+  var bar=h('div',{class:'bar'},h('i'));bars[k]=bar;
+  card.append(h('div',{class:'ctr'},[h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap'},[h('div',null,[h('b',null,k),h('small',{style:'color:var(--mut);display:block'},(r[2]?tx('ct_wk'):tx('ct_day'))+': '+r[1])]),h('div',{class:'row',style:'flex-wrap:nowrap;gap:4px'},[h('button',{class:'chip',onclick:function(){bump(-1)}},'−'),inp,h('button',{class:'chip',onclick:function(){bump(1)}},'+')])]),bar,h('small',{style:'color:var(--mut)'},'')]))});
+ var ck=h('div',{class:'card'});app.append(h('h2',null,tx('ct_chk')),ck);
+ var links={Fetih:48,Yasin:36,'Mülk':67};
+ CT_CHK.forEach(function(k){var cb=h('input',{type:'checkbox',style:'width:20px;height:20px;margin-right:10px'});cb.checked=!!D.c[k];cb.onchange=function(){D.c[k]=cb.checked};ck.append(h('label',{style:'display:flex;align-items:center;padding:7px 0;cursor:pointer'},[cb,h('span',{style:'flex:1'},k),links[k]?h('a',{href:'#/kuran/'+links[k],class:'chip',style:'text-decoration:none'},'📖'):''])) });
+ var msg=h('p',{class:'lead',style:'margin:8px 0'});
+ var pre=h('button',{class:'btn o',onclick:function(){var a=Object.keys(ls('rd')||{}).length,ra=+((ls('ctset')||{}).ratio)||10,td=(ls('rdd')||{})[sel]||0,m=Math.round(((ls('lis')||{})[sel]||0)/60);
+   var kk=Math.round(td/ra*10)/10;inputs.KK.value=kk;D.v.KK=kk;inputs.Dinleme.value=m;D.v.Dinleme=m;refresh();msg.textContent=tx('ct_prn').replace('{a}',td).replace('{m}',m)}},tx('ct_pre'));
+ var sv=h('button',{class:'btn',onclick:function(){ST.days[sel]=D;ls('ct',ST);msg.textContent='…';ctSend(sel,ST).then(function(r){if(r.ok){D.sent=Date.now();ls('ct',ST);msg.textContent=tx('ct_sent')+' ('+r.sheet+', '+r.rowDate+')'}else if(r.error==='date-mismatch')msg.textContent=tx('ct_mm').replace('{d}',r.rowDate+' ≠ '+dmS(d));else if(r.error==='no-url'||r.error==='net')msg.textContent=tx('ct_pend');else msg.textContent=(tx('ct_err')[r.error]||r.error)})}},tx('ct_save'));
+ app.append(h('div',{class:'ctl',style:'margin-top:12px'},[totEl]),h('div',{class:'row'},[pre,sv]),msg);
+ /* haftalık özet */
+ var tb=h('table',{class:'ctt'}),hd=h('tr',null,[h('th',null,'')]);['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'].forEach(function(n){hd.append(h('th',null,n))});hd.append(h('th',null,'Σ'));tb.append(hd);
+ CT_NUM.forEach(function(r){var tr=h('tr',null,[h('td',null,r[0])]);wk.forEach(function(dd){tr.append(h('td',{style:dd===sel?'background:color-mix(in srgb,var(--gold) 25%,transparent)':''},String(((ST.days[dd]||{v:{}}).v[r[0]])||'')))});tr.append(h('td',null,h('b',null,String(wsum(r[0])))));tb.append(tr)});
+ app.append(h('h2',null,tx('ct_sum')+' ('+dmS(pd(wk[0]))+'–'+dmS(pd(wk[6]))+')'),h('div',{style:'overflow-x:auto'},tb));refresh();
+ /* ayarlar */
+ var S=ls('ctset')||{},f=function(k,l,t,ph){var i=h('input',{type:t||'text',value:S[k]||'',placeholder:ph||'',style:'width:100%'});i.oninput=function(){S[k]=i.value.trim();ls('ctset',S)};return h('label',{style:'display:block;margin:8px 0'},[h('small',{style:'color:var(--mut)'},l),i])};
+ var tr2=h('p',null),set=h('details',{class:'card',style:'margin-top:16px'},[h('summary',{style:'cursor:pointer;font-weight:700'},tx('ct_set')),h('ol',{style:'color:var(--mut);padding-left:18px'},tx('ct_help').map(function(s){return h('li',null,s.replace(/^\d\) /,''))})),
+  h('button',{class:'chip',onclick:function(){var b=this;fetch('cetele.gs').then(function(r){return r.text()}).then(function(t){copyText(b,t)})}},tx('ct_copy')),
+  f('url',tx('ct_url'),'url','https://script.google.com/macros/s/…/exec'),f('key',tx('ct_key'),'password'),f('sheet',tx('ct_sheet')),f('person',tx('ct_person'),'text','Name 3'),f('ratio',tx('ct_ratio'),'number','10'),
+  h('button',{class:'btn o',onclick:function(){var s=ls('ctset')||{};tr2.textContent='…';fetch(s.url+(s.url.indexOf('?')>=0?'&':'?')+'key='+encodeURIComponent(s.key||'')).then(function(r){return r.json()}).then(function(j){tr2.textContent=j.ok&&j.keyOk?tx('ct_ok'):tx('ct_bad')}).catch(function(){tr2.textContent=tx('ct_bad')})}},tx('ct_test')),tr2]);
+ app.append(set)}
 function duas(){app.innerHTML='';app.append(h('h1',null,tx('duh')),h('p',{class:'lead'},tx('dul')));
  var chips=h('div',{class:'chips'}),box=h('div');app.append(h('a',{class:'btn g',href:'#/ozel',style:'margin-bottom:14px'},'⭐ '+tx('t6')),h('div',{style:'height:10px'}),chips,box);
  Promise.all([qIndex(),load('duas')]).then(function(x){var I=x[0],P=x[1];
@@ -380,7 +444,7 @@ function ozel(){app.innerHTML='';app.append(h('h1',null,tx('ozh')),h('p',{class:
  qIndex().then(function(I){[[36,'يس'],[67,'الملك'],[56,'الواقعة'],[48,'الفتح']].forEach(function(x){g.append(h('a',{class:'card oz tile',href:'#/kuran/'+x[0]},[h('div',{class:'az'},x[1]),h('b',null,tx('ozn')[x[0]]),h('span',null,I.n[x[0]-1]+' '+tx('ay'))]))});
   app.append(h('div',{style:'margin-top:18px'},h('a',{class:'btn o',href:'#/dualar'},tx('ozd'))))})}
 /* ---------- router ---------- */
-var R={namaz:namaz,men:men,'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir,dualar:duas,ozel:ozel,kuran:function(n,a){n?quranSura(n,a):quranList()}};
+var R={cetele:cetele,namaz:namaz,men:men,'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir,dualar:duas,ozel:ozel,kuran:function(n,a){n?quranSura(n,a):quranList()}};
 function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];qStop();clrTM();(R[r]||home)(pp[1],pp[2]);var nr=r==='kuran'?'kitaplar':(R[r]?r:'');document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===nr)});if(r!=='kuran')window.scrollTo(0,0)}
 addEventListener('hashchange',route);
 $('#lg').onclick=function(){lang=lang==='tr'?'kg':'tr';try{localStorage.setItem('lang',lang)}catch(e){}applyLang();route()};
