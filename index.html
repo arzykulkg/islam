@@ -53,10 +53,21 @@ input[type=search],input[type=text],textarea,select{width:100%;border:1.5px soli
 .zl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
 .zs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}.zs .card{padding:10px 16px;min-width:110px}.zs b{font-size:22px;display:block}.zs span{font-size:12px;color:var(--mut)}
 .pulse{animation:pu .6s}@keyframes pu{0%{box-shadow:0 0 0 0 rgba(201,162,39,.8)}100%{box-shadow:0 0 0 40px rgba(201,162,39,0)}}
+
+.ar{font:400 30px/2.1 Amiri,'Traditional Arabic',serif;direction:rtl;text-align:right;color:var(--ink);margin:0}
+.ar.sm{font-size:25px}.vtr{color:var(--mut);margin:4px 0 0}.vn{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;border-radius:50%;background:var(--g);color:#fff;font:600 13px Inter;margin-right:8px;flex:none}
+.ay{padding:14px 4px;border-bottom:1px solid var(--line)}.ay .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.bism{text-align:center;font:400 30px/2 Amiri,serif;color:var(--g);margin:10px 0 4px}
+.sl{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;cursor:pointer;text-decoration:none;color:inherit;border:1px solid var(--line);background:var(--card)}.sl:hover{border-color:var(--g)}
+.sl .no{width:38px;height:38px;border-radius:10px;background:color-mix(in srgb,var(--g) 14%,transparent);color:var(--g);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}.sl b{display:block}.sl small{color:var(--mut)}
+.pn{font:700 24px Amiri,serif;color:var(--g);margin:26px 0 8px;border-bottom:2px solid var(--gold);padding-bottom:4px}
+.dua{margin-bottom:12px}.dua .ref{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.2px}.dua .nt{font-weight:600;margin:0 0 6px}
+.oz{text-align:center;display:block;text-decoration:none;color:inherit}.oz .az{font:700 44px Amiri,serif;color:var(--g);line-height:1.4}.oz b{font-size:19px;display:block}.oz span{color:var(--mut);font-size:14px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 10px}
 footer{text-align:center;color:var(--mut);font-size:13px;padding:30px 16px 110px}
 </style></head><body>
 <header><div class="hd"><a class="logo" href="#/"><svg viewBox="0 0 100 100"><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#e8c766"/><path d="M70 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#e8c766"/></svg>İslam</a><span class="sp"></span><button class="tm" id="lg" title="Dil / Тил"></button><button class="tm" id="tm" title="Tema">🌙</button></div>
-<nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kitaplar" data-r="kitaplar">📚 Kitaplar</a><a href="#/dinle" data-r="dinle">🎧 Dinle</a><a href="#/yazilar" data-r="yazilar">✍️ Yazılar</a><a href="#/zikirmatik" data-r="zikirmatik">📿 Zikirmatik</a></nav></header>
+<nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kitaplar" data-r="kitaplar">📚 Kitaplar</a><a href="#/dinle" data-r="dinle">🎧 Dinle</a><a href="#/yazilar" data-r="yazilar">✍️ Yazılar</a><a href="#/dualar" data-r="dualar">🤲 Dualar</a><a href="#/ozel" data-r="ozel">⭐ Özel</a><a href="#/zikirmatik" data-r="zikirmatik">📿 Zikirmatik</a></nav></header>
 <main id="app"></main>
 <footer><span id="ft"></span> · <span id="yr"></span></footer>
 <div class="player" id="pl" hidden><div class="in"><div class="row" style="justify-content:space-between;margin-bottom:4px"><b id="pt" style="font-size:14px"></b><span class="row"><select id="ps" style="width:auto;padding:4px 8px"><option value=".75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><button class="chip" id="pn">⏭</button><button class="chip" id="px">✕</button></span></div><audio id="au" controls preload="none"></audio></div></div>
@@ -70,7 +81,11 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;
 $('#yr').textContent=new Date().getFullYear();
 /* ---------- i18n ---------- */
 var L={
-tr:{title:'İslam – Kitaplar, Dinle, Yazılar, Zikirmatik',nav:['Ana sayfa','📚 Kitaplar','🎧 Dinle','✍️ Yazılar','📿 Zikirmatik'],foot:'Allah kabul etsin',other:'Кыргызча',
+tr:{title:'İslam – Kitaplar, Dinle, Yazılar, Zikirmatik',nav:['Ana sayfa','📚 Kitaplar','🎧 Dinle','✍️ Yazılar','🤲 Dualar','⭐ Özel','📿 Zikirmatik'],
+ qh:'Kur’an-ı Kerim',qd:'114 sure · Arapça metin ve meal',qs:'Sure ara… (isim veya numara)',ay:'ayet',sura:'Sure',qprev:'← Önceki sure',qnext:'Sonraki sure →',qshow:'Meal',qcont:'Kaldığın yerden devam: ',copy:'📋 Kopyala',copied:'Kopyalandı ✓',qcred:'Arapça metin: Uthmani Hafs · Meal: Diyanet İşleri',
+ t5:'Dualar',d5:'Kur’an’da geçen peygamber duaları: Âdem’den Hz. Muhammed’e',t6:'Özel',d6:'Yâsîn, Mülk, Vâkıa ve Fetih sureleri',
+ duh:'Peygamberlerin Duaları',dul:'Kur’an’da geçen peygamber duaları, Hz. Âdem (a.s.)’dan Hz. Muhammed Mustafa (s.a.v.)’a kadar. Duanın geçtiği ayetin tamamı verilmiştir.',ozh:'Özel',ozl:'Okumak istediğin özel sureler.',ozd:'Dualar →',
+ ozn:{36:'Yâsîn',67:'Mülk',56:'Vâkıa',48:'Fetih'},foot:'Allah kabul etsin',other:'Кыргызча',
  bism:'Bismillâhirrahmânirrahîm',homelead:'Kitap oku, dinle, yazıları takip et ve zikret.',
  t1:'Kitaplar',d1:'Sitede oku, istersen indir',t2:'Dinle',d2:'Ses kayıtları, hız ayarı, kaldığın yerden devam',t3:'Yazılar',d3:'Makaleler ve notlar · kendi notlarını da tut',t4:'Zikirmatik',d4:'Hazır zikirler, hedef, titreşim',
  recent:'Son yazılar',bkh:'Kitaplar',bkl:'Kitabı seç, sitede oku veya indir.',bks:'Kitap veya yazar ara…',all:'Tümü',other2:'Diğer',bke:'Henüz kitap eklenmedi. Yakında burada olacak.',read:'📖 Oku',dl:'⬇ İndir',back:'← Geri',
@@ -78,7 +93,11 @@ tr:{title:'İslam – Kitaplar, Dinle, Yazılar, Zikirmatik',nav:['Ana sayfa','�
  ph:'Yazılar',pl:'Makaleler, dualar ve notlar.',tabp:'Yazılar',tabn:'🗒 Notlarım',pe:'Henüz yazı yok.',nl:'Notların yalnızca bu cihazda saklanır, kimse görmez.',np:'Not yaz…',save:'Kaydet',nn:'Henüz not yok.',del:'Sil',delq:'Silinsin mi?',
  zh:'Zikirmatik',zl:'Dokun ve say. Sayacın bu cihazda saklanır.',undo:'↶ Geri al',reset:'↺ Sıfırla',goal:'🎯 Hedef',vo:'📳 Titreşim açık',vc:'📴 Titreşim kapalı',goalq:'Hedef sayı (0 = hedefsiz):',today:'Bugün (toplam)',tot:'Bu zikirde toplam',tap:'dokun',
  z:{sub:'Sübhânallah',hmd:'Elhamdülillâh',ekb:'Allâhu ekber',ist:'Estağfirullâh',lel:'Lâ ilâhe illallâh',sal:'Salavât-ı şerîfe',hql:'Lâ havle velâ kuvvete illâ billâh',cus:'Serbest sayaç'}},
-kg:{title:'Ислам – Китептер, Угуу, Макалалар, Зикирматик',nav:['Башкы бет','📚 Китептер','🎧 Угуу','✍️ Макалалар','📿 Зикирматик'],foot:'Аллах кабыл кылсын',other:'Türkçe',
+kg:{title:'Ислам – Китептер, Угуу, Макалалар, Зикирматик',nav:['Башкы бет','📚 Китептер','🎧 Угуу','✍️ Макалалар','🤲 Дубалар','⭐ Атайын','📿 Зикирматик'],
+ qh:'Куран-Керим',qd:'114 сүрө · араб тексти жана котормо',qs:'Сүрө издөө… (аты же номери)',ay:'аят',sura:'Сүрө',qprev:'← Мурунку сүрө',qnext:'Кийинки сүрө →',qshow:'Котормо',qcont:'Токтогон жерден улантуу: ',copy:'📋 Көчүрүү',copied:'Көчүрүлдү ✓',qcred:'Араб тексти: Uthmani Hafs · Кыргызча котормо: Шамсиддин Хакимов',
+ t5:'Дубалар',d5:'Куранда айтылган пайгамбарлардын дубалары: Адамдан Мухаммадга чейин',t6:'Атайын',d6:'Ясин, Мулк, Вакиа жана Фатх сүрөлөрү',
+ duh:'Пайгамбарлардын дубалары',dul:'Куранда айтылган пайгамбарлардын дубалары, Адам (а.с.)дан Мухаммад Мустафа (с.а.в.)га чейин. Дуба кездешкен аяттын толугу берилди.',ozh:'Атайын',ozl:'Окууну каалаган атайын сүрөлөр.',ozd:'Дубалар →',
+ ozn:{36:'Ясин',67:'Мулк',56:'Вакиа',48:'Фатх'},foot:'Аллах кабыл кылсын',other:'Türkçe',
  bism:'Бисмиллаахир-Рахмаанир-Рахийм',homelead:'Китеп окуңуз, угуңуз, макалаларды окуңуз жана зикир кылыңыз.',
  t1:'Китептер',d1:'Сайтта окуңуз, кааласаңыз жүктөп алыңыз',t2:'Угуу',d2:'Аудио жазуулар, ылдамдыкты тууралоо, токтогон жерден улантуу',t3:'Макалалар',d3:'Макалалар жана жазуулар · өз жазууларыңызды да сактаңыз',t4:'Зикирматик',d4:'Даяр зикирлер, максат, титирөө',
  recent:'Акыркы макалалар',bkh:'Китептер',bkl:'Китепти тандаңыз, сайтта окуңуз же жүктөп алыңыз.',bks:'Китеп же автор издөө…',all:'Баары',other2:'Башка',bke:'Азырынча китеп кошула элек. Жакында бул жерде болот.',read:'📖 Окуу',dl:'⬇ Жүктөө',back:'← Артка',
@@ -100,13 +119,14 @@ function load(n){if(DATA[n])return Promise.resolve(DATA[n]);return fetch('data/'
 function home(){app.innerHTML='';
  app.append(h('h1',null,tx('bism')),h('p',{class:'lead'},tx('homelead')));
  var g=h('div',{class:'grid'});
- [['📚',tx('t1'),tx('d1'),'#/kitaplar'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['📿',tx('t4'),tx('d4'),'#/zikirmatik']].forEach(function(x){
+ [['📚',tx('t1'),tx('d1'),'#/kitaplar'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['🤲',tx('t5'),tx('d5'),'#/dualar'],['⭐',tx('t6'),tx('d6'),'#/ozel'],['📿',tx('t4'),tx('d4'),'#/zikirmatik']].forEach(function(x){
   g.append(h('a',{class:'card tile',href:x[3]},[h('div',{class:'ic'},x[0]),h('b',null,x[1]),h('span',null,x[2])]))});
  app.append(g);
  load('posts').then(function(P){if(!P.length)return;app.append(h('h2',null,tx('recent')));P.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,3).forEach(function(p){app.append(postCard(p))})})}
 /* ---------- books ---------- */
 function openPdf(b){var ov=h('div',{class:'ov'},[h('div',{class:'bar'},[h('button',{class:'btn o',style:'color:#fff;border-color:#fff',onclick:function(){ov.remove()}},tx('back')),h('b',{style:'flex:1;font-size:15px'},F(b,'t')),h('a',{class:'btn g',href:b.file,download:''},tx('dl'))]),h('iframe',{src:b.file})]);document.body.append(ov)}
 function books(){app.innerHTML='';app.append(h('h1',null,tx('bkh')),h('p',{class:'lead'},tx('bkl')));
+ app.append(h('a',{class:'card tile',href:'#/kuran',style:'display:flex;align-items:center;gap:14px;margin-bottom:16px;border-color:var(--gold)'},[h('div',{class:'ic'},'📖'),h('div',null,[h('b',{style:'margin:0'},tx('qh')),h('span',null,tx('qd'))])]));
  var q=h('input',{type:'search',placeholder:tx('bks')}),chips=h('div',{class:'chips'}),list=h('div',{class:'grid'});app.append(q,h('div',{style:'height:12px'}),chips,list);
  load('books').then(function(B){var cat='';
   if(!B.length){list.replaceWith(h('div',{class:'empty'},tx('bke')));return}
@@ -173,9 +193,49 @@ function zikir(){app.innerHTML='';var S=ls('zk')||{cur:'sub',c:{},tg:{},tot:{},v
     h('button',{class:'btn o',onclick:function(){S.vib=S.vib?0:1;save();draw()}},S.vib?tx('vo'):tx('vc'))]),
    h('div',{class:'zs'},[h('div',{class:'card'},[tt,h('span',null,tx('today'))]),h('div',{class:'card'},[tl,h('span',null,tx('tot'))])]))}
  draw()}
+
+/* ---------- Kur'an, dualar, özel ---------- */
+var QI=null,QC={};
+function qIndex(){return QI?Promise.resolve(QI):fetch('data/quran/index.json').then(function(r){return r.json()}).then(function(d){return QI=d})}
+function qSura(n){var k=('00'+n).slice(-3);return QC[n]?Promise.resolve(QC[n]):fetch('data/quran/'+k+'.json').then(function(r){return r.json()}).then(function(d){return QC[n]=d})}
+function sname(n){return QI[lang][n-1]}
+function copyText(btn,t){var done=function(){var o=btn.textContent;btn.textContent=tx('copied');setTimeout(function(){btn.textContent=o},1500)};
+ if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,function(){});else{var ta=h('textarea');ta.value=t;document.body.append(ta);ta.select();try{document.execCommand('copy');done()}catch(e){}ta.remove()}}
+function quranList(){app.innerHTML='';app.append(h('h1',null,tx('qh')),h('p',{class:'lead'},tx('qd')));
+ var q=h('input',{type:'search',placeholder:tx('qs')}),cont=h('div'),list=h('div',{class:'grid'});app.append(q,h('div',{style:'height:12px'}),cont,list);
+ qIndex().then(function(I){var last=ls('qlast');
+  if(last)cont.append(h('a',{class:'btn g',href:'#/kuran/'+last,style:'margin-bottom:14px'},tx('qcont')+sname(last)));
+  function draw(){list.innerHTML='';var f=q.value.trim().toLowerCase();for(var i=1;i<=114;i++){var nm=I[lang][i-1];if(f&&nm.toLowerCase().indexOf(f)<0&&I.tr[i-1].toLowerCase().indexOf(f)<0&&String(i)!==f)continue;
+   list.append(h('a',{class:'sl',href:'#/kuran/'+i},[h('div',{class:'no'},String(i)),h('div',null,[h('b',null,nm),h('small',null,I.n[i-1]+' '+tx('ay'))])]))}}
+  q.oninput=draw;draw()})}
+function quranSura(n){n=Math.max(1,Math.min(114,+n||1));ls('qlast',n);app.innerHTML='';
+ var box=h('div');app.append(box);
+ Promise.all([qIndex(),qSura(n)]).then(function(x){var I=x[0],S=x[1];var fs=ls('qfs')||30,showTr=ls('qtr')!==0;
+  box.append(h('div',{class:'row',style:'justify-content:space-between;margin-bottom:6px'},[h('a',{class:'btn o',href:'#/kuran'},'←'),h('span',{class:'row'},[h('a',{class:'btn o',href:'#/kuran/'+(n>1?n-1:114)},'‹'),h('a',{class:'btn o',href:'#/kuran/'+(n<114?n+1:1)},'›')])]));
+  box.append(h('h1',null,n+'. '+I[lang][n-1]),h('p',{class:'lead'},tx('sura')+' · '+I.n[n-1]+' '+tx('ay')));
+  var ctl=h('div',{class:'ctl'});var body=h('div');
+  function apply(){body.querySelectorAll('.ar').forEach(function(e){e.style.fontSize=fs+'px'});body.querySelectorAll('.vtr').forEach(function(e){e.style.display=showTr?'':'none'})}
+  ctl.append(h('button',{class:'chip',onclick:function(){fs=Math.max(20,fs-3);ls('qfs',fs);apply()}},'A−'),h('button',{class:'chip',onclick:function(){fs=Math.min(60,fs+3);ls('qfs',fs);apply()}},'A+'),h('button',{class:'chip'+(showTr?' on':''),onclick:function(){showTr=!showTr;ls('qtr',showTr?1:0);this.classList.toggle('on',showTr);apply()}},tx('qshow')));
+  box.append(ctl,h('div',{class:'card'},body));
+  if(n!==1&&n!==9)body.append(h('div',{class:'bism'},'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ'));
+  S.a.forEach(function(a,i){var ay=h('div',{class:'ay'},[h('div',{class:'top'},[h('span',{class:'vn'},String(i+1)),h('button',{class:'chip',onclick:function(){copyText(this,a+'\n'+S[lang][i]+'\n('+I[lang][n-1]+' '+n+':'+(i+1)+')')}},tx('copy'))]),h('p',{class:'ar'},a),h('p',{class:'vtr'},S[lang][i])]);body.append(ay)});
+  box.append(h('div',{class:'row',style:'justify-content:space-between;margin-top:16px'},[h('a',{class:'btn o',href:'#/kuran/'+(n>1?n-1:114)},tx('qprev')),h('a',{class:'btn',href:'#/kuran/'+(n<114?n+1:1)},tx('qnext'))]),h('p',{class:'lead',style:'font-size:13px;margin-top:14px'},tx('qcred')));
+  apply();window.scrollTo(0,0)})}
+function duas(){app.innerHTML='';app.append(h('h1',null,tx('duh')),h('p',{class:'lead'},tx('dul')));
+ var chips=h('div',{class:'chips'}),box=h('div');app.append(h('a',{class:'btn g',href:'#/ozel',style:'margin-bottom:14px'},'⭐ '+tx('t6')),h('div',{style:'height:10px'}),chips,box);
+ Promise.all([qIndex(),load('duas')]).then(function(x){var I=x[0],P=x[1];
+  P.forEach(function(p,pi){var id='pn'+pi;chips.append(h('span',{class:'chip',onclick:function(){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}},F(p,'p').replace(/ \(.*?\)/,'')));
+   box.append(h('div',{class:'pn',id:id},F(p,'p')));
+   p.items.forEach(function(it){var ref=I[lang][it.s-1]+' '+it.s+':'+it.a1+(it.a2>it.a1?'–'+it.a2:'');
+    box.append(h('div',{class:'card dua'},[h('div',{class:'ref'},ref),h('div',{class:'nt'},F(it,'n')),h('p',{class:'ar sm'},it.ar),h('p',{class:'vtr',style:'display:block;margin-top:8px'},it[lang]),h('div',{style:'margin-top:10px'},h('button',{class:'chip',onclick:function(){copyText(this,it.ar+'\n'+it[lang]+'\n('+ref+')')}},tx('copy')))]))})});
+  var t=location.hash.split('/')[2];if(t&&document.getElementById('pn'+t))document.getElementById('pn'+t).scrollIntoView()})}
+function ozel(){app.innerHTML='';app.append(h('h1',null,tx('ozh')),h('p',{class:'lead'},tx('ozl')));
+ var g=h('div',{class:'grid'});app.append(g);
+ qIndex().then(function(I){[[36,'يس'],[67,'الملك'],[56,'الواقعة'],[48,'الفتح']].forEach(function(x){g.append(h('a',{class:'card oz tile',href:'#/kuran/'+x[0]},[h('div',{class:'az'},x[1]),h('b',null,tx('ozn')[x[0]]),h('span',null,I.n[x[0]-1]+' '+tx('ay'))]))});
+  app.append(h('div',{style:'margin-top:18px'},h('a',{class:'btn o',href:'#/dualar'},tx('ozd'))))})}
 /* ---------- router ---------- */
-var R={'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir};
-function route(){var r=(location.hash.replace(/^#\/?/,'')||'').split('/')[0];(R[r]||home)();document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===(R[r]?r:''))});window.scrollTo(0,0)}
+var R={'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir,dualar:duas,ozel:ozel,kuran:function(n){n?quranSura(n):quranList()}};
+function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];(R[r]||home)(pp[1]);var nr=r==='kuran'?'kitaplar':(R[r]?r:'');document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===nr)});if(r!=='kuran')window.scrollTo(0,0)}
 addEventListener('hashchange',route);
 $('#lg').onclick=function(){lang=lang==='tr'?'kg':'tr';try{localStorage.setItem('lang',lang)}catch(e){}applyLang();route()};
 applyLang();route();
