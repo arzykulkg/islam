@@ -370,14 +370,14 @@ function homePanel(box){var n=nextPrayer(),L0=curLoc(),dn=Math.floor(Date.now()/
  load('duas').then(function(P){var all=[];P.forEach(function(p){p.items.forEach(function(it){all.push(it)})});if(!all.length)return;var it=all[dn%all.length];qIndex().then(function(I){box.append(h('div',{class:'card dua'},[h('div',{class:'ref'},tx('daydua')+' · '+I[lang][it.s-1]+' '+it.s+':'+it.a1),h('p',{class:'ar sm'},it.ar),h('p',{class:'vtr',style:'display:block'},it[lang])]))})})}
 /* ====== Çetele ====== */
 Object.assign(L.tr,{t9:'Çetele',d9:'Günlük/haftalık ibadet çetelesi, Google Tabloya otomatik yazar',
- ct_h:'Çetele',ct_wk:'Hafta',ct_goal:'Hedef',ct_day:'Günlük',ct_save:'💾 Kaydet ve tabloya gönder',ct_pre:'📥 Siteden al',ct_prn:'Bugünkü okuma: {a} ayet · dinleme: {m} dk → KK ve Dinleme alanlarına yazıldı.',
+ ct_h:'Çetele',ct_wk:'Hafta',ct_goal:'Hedef',ct_day:'Günlük',ct_save:'💾 Kaydet ve tabloya gönder',ct_nolink:'⚠️ Google Tablo bağlantısı henüz girilmedi. Aşağıdaki “Google Tablo bağlantısı” bölümüne web adresini ve gizli anahtarı girin; yoksa veriler sadece bu cihazda kalır.',ct_pre:'📥 Siteden al',ct_prn:'Bugünkü okuma: {a} ayet · dinleme: {m} dk → KK ve Dinleme alanlarına yazıldı.',
  ct_sent:'Tabloya yazıldı ✓',ct_pend:'Kaydedildi (tablo bağlantısı yok/hata). Daha sonra tekrar gönderilecek.',ct_tot:'Puan',ct_sum:'Haftalık özet',ct_chk:'Tamamlandı (hafta içinde)',
  ct_set:'⚙️ Google Tablo bağlantısı',ct_url:'Apps Script web adresi',ct_key:'Gizli anahtar',ct_sheet:'Sekme adı (boşsa bağlantıdaki sekme)',ct_person:'Tablodaki bloğunuz',ct_ratio:'Kaç ayet = 1 KK',ct_test:'Bağlantıyı dene',ct_ok:'Bağlantı tamam ✓',ct_bad:'Bağlantı kurulamadı veya anahtar yanlış',ct_copy:'📋 Script kodunu kopyala',
  ct_mm:'Tablodaki tarih uyuşmuyor ({d}). Yanlış hafta sekmesi olabilir; sekme adını ayarlardan değiştirin.',ct_err:{'bad-key':'Gizli anahtar yanlış','no-sheet':'Sekme bulunamadı','no-person':'Tabloda bu ad bulunamadı','no-day':'Gün satırı bulunamadı'},
  ct_help:['1) script.new adresini açın (kendi Google hesabınızla), kodu yapıştırın.','2) KEY satırına kendi gizli kelimenizi yazın.','3) Dağıt → Yeni dağıtım → Web uygulaması: “Şu kullanıcı olarak çalıştır: Ben”, “Erişim: Herkes”. İzin verin.','4) Çıkan web adresini ve aynı gizli kelimeyi aşağıya girin, “Bağlantıyı dene”.'],
  nav:['Ana sayfa','📚 Kitaplar','🎧 Dinle','✍️ Yazılar','🤲 Dualar','⭐ Özel','🕌 Namaz','📝 Çetele','👤 Ben','📿 Zikirmatik']});
 Object.assign(L.kg,{t9:'Ибадат эсеби',d9:'Күндүк/жумалык ибадат эсеби, Google таблицага автоматтык жазылат',
- ct_h:'Ибадат эсеби (çetele)',ct_wk:'Жума',ct_goal:'Максат',ct_day:'Күнүнө',ct_save:'💾 Сактоо жана таблицага жөнөтүү',ct_pre:'📥 Сайттан алуу',ct_prn:'Бүгүнкү окуу: {a} аят · угуу: {m} мүн → KK жана Dinleme талааларына жазылды.',
+ ct_h:'Ибадат эсеби (çetele)',ct_wk:'Жума',ct_goal:'Максат',ct_day:'Күнүнө',ct_save:'💾 Сактоо жана таблицага жөнөтүү',ct_nolink:'⚠️ Google таблица менен байланыш азырынча киргизилген жок. Төмөндөгү «Google таблица менен байланыш» бөлүмүнө веб даректи жана жашыруун ачкычты киргизиңиз; болбосо маалымат ушул түзмөктө гана калат.',ct_pre:'📥 Сайттан алуу',ct_prn:'Бүгүнкү окуу: {a} аят · угуу: {m} мүн → KK жана Dinleme талааларына жазылды.',
  ct_sent:'Таблицага жазылды ✓',ct_pend:'Сакталды (таблица менен байланыш жок/ката). Кийин кайра жөнөтүлөт.',ct_tot:'Упай',ct_sum:'Жумалык жыйынтык',ct_chk:'Аткарылды (жума ичинде)',
  ct_set:'⚙️ Google таблица менен байланыш',ct_url:'Apps Script веб дареги',ct_key:'Жашыруун ачкыч',ct_sheet:'Барак аты (бош болсо шилтемедеги барак)',ct_person:'Таблицадагы блогуңуз',ct_ratio:'Канча аят = 1 KK',ct_test:'Байланышты текшерүү',ct_ok:'Байланыш бар ✓',ct_bad:'Байланыш түзүлгөн жок же ачкыч туура эмес',ct_copy:'📋 Скрипт кодун көчүрүү',
  ct_mm:'Таблицадагы дата дал келген жок ({d}). Башка жуманын барагы болушу мүмкүн; барак атын жөндөөдөн өзгөртүңүз.',ct_err:{'bad-key':'Жашыруун ачкыч туура эмес','no-sheet':'Барак табылган жок','no-person':'Таблицада бул ат табылган жок','no-day':'Күндүн сабы табылган жок'},
@@ -396,10 +396,12 @@ function ctSend(date,store){var S=ls('ctset')||{};if(!S.url)return Promise.resol
 (function(){function tr(a){var prev=0,acc=0;function flush(){if(acc>0){var o=ls('lis')||{},t=today();o[t]=(o[t]||0)+acc;ls('lis',o);acc=0}}
  a.addEventListener('timeupdate',function(){var d=a.currentTime-prev;prev=a.currentTime;if(d>0&&d<2){acc+=d;if(acc>15)flush()}});a.addEventListener('seeked',function(){prev=a.currentTime});a.addEventListener('pause',flush);a.addEventListener('ended',flush);a.addEventListener('play',function(){prev=a.currentTime})}
  tr(QA);var au=document.getElementById('au');if(au)tr(au)})();
+var autoSave=function(){};
 function cetele(){app.innerHTML='';var sel=ls('ctsel')||today(),ST=ls('ct')||{days:{}},GO=ls('ctgoal')||{};ls('ctsel',null);
  var d=pd(sel),mon=new Date(d);mon.setDate(d.getDate()-(wd(d)-1));var wk=[];for(var i=0;i<7;i++){var x=new Date(mon);x.setDate(mon.getDate()+i);wk.push(ymd(x))}
  var D=ST.days[sel]=ST.days[sel]||{v:{},c:{}};
  app.append(h('h1',null,tx('ct_h')));
+ if(!(ls('ctset')||{}).url)app.append(h('div',{class:'card',style:'border-color:#c0392b;margin-bottom:10px'},tx('ct_nolink')));
  app.append(h('div',{class:'row',style:'justify-content:space-between;margin-bottom:8px'},[h('button',{class:'btn o',onclick:function(){var x=pd(sel);x.setDate(x.getDate()-1);ls('ctsel',ymd(x));cetele()}},'‹'),h('b',null,dmS(d)+' · '+['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'][wd(d)-1]+(sel===today()?' · '+tx('today'):'')),h('button',{class:'btn o',onclick:function(){var x=pd(sel);x.setDate(x.getDate()+1);ls('ctsel',ymd(x));cetele()}},'›')]));
  var inputs={},card=h('div',{class:'card'});app.append(card);
  function wsum(k){var s=0;wk.forEach(function(dd){var v=(ST.days[dd]||{v:{}}).v[k];s+=+v||0});return s}
@@ -408,17 +410,19 @@ function cetele(){app.innerHTML='';var sel=ls('ctsel')||today(),ST=ls('ct')||{da
   CT_NUM.forEach(function(r){var w=wsum(r[0]),t=tgt(r),el=bars[r[0]];el.firstChild.style.width=Math.min(100,w/t*100)+'%';el.nextSibling.textContent=w+' / '+t;el.parentNode.classList.toggle('done',w>=t)})}
  var bars={},totEl=h('b',{style:'color:var(--g)'});
  CT_NUM.forEach(function(r){var k=r[0],inp=h('input',{type:'number',min:0,step:'any',value:D.v[k]!=null?D.v[k]:'',style:'width:78px;text-align:center'});inputs[k]=inp;
-  inp.oninput=function(){D.v[k]=inp.value===''?null:+inp.value;refresh()};
+  inp.oninput=function(){D.v[k]=inp.value===''?null:+inp.value;refresh();autoSave()};
   function bump(n){inp.value=Math.max(0,(+inp.value||0)+n);inp.oninput()}
   var bar=h('div',{class:'bar'},h('i'));bars[k]=bar;
   card.append(h('div',{class:'ctr'},[h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap'},[h('div',null,[h('b',null,k),h('small',{style:'color:var(--mut);display:block'},(r[2]?tx('ct_wk'):tx('ct_day'))+': '+r[1])]),h('div',{class:'row',style:'flex-wrap:nowrap;gap:4px'},[h('button',{class:'chip',onclick:function(){bump(-1)}},'−'),inp,h('button',{class:'chip',onclick:function(){bump(1)}},'+')])]),bar,h('small',{style:'color:var(--mut)'},'')]))});
  var ck=h('div',{class:'card'});app.append(h('h2',null,tx('ct_chk')),ck);
  var links={Fetih:48,Yasin:36,'Mülk':67};
- CT_CHK.forEach(function(k){var cb=h('input',{type:'checkbox',style:'width:20px;height:20px;margin-right:10px'});cb.checked=!!D.c[k];cb.onchange=function(){D.c[k]=cb.checked};ck.append(h('label',{style:'display:flex;align-items:center;padding:7px 0;cursor:pointer'},[cb,h('span',{style:'flex:1'},k),links[k]?h('a',{href:'#/kuran/'+links[k],class:'chip',style:'text-decoration:none'},'📖'):''])) });
+ CT_CHK.forEach(function(k){var cb=h('input',{type:'checkbox',style:'width:20px;height:20px;margin-right:10px'});cb.checked=!!D.c[k];cb.onchange=function(){D.c[k]=cb.checked;autoSave()};ck.append(h('label',{style:'display:flex;align-items:center;padding:7px 0;cursor:pointer'},[cb,h('span',{style:'flex:1'},k),links[k]?h('a',{href:'#/kuran/'+links[k],class:'chip',style:'text-decoration:none'},'📖'):''])) });
  var msg=h('p',{class:'lead',style:'margin:8px 0'});
  var pre=h('button',{class:'btn o',onclick:function(){var a=Object.keys(ls('rd')||{}).length,ra=+((ls('ctset')||{}).ratio)||10.3,td=(ls('rdd')||{})[sel]||0,m=Math.round(((ls('lis')||{})[sel]||0)/60);
-   var kk=Math.round(td/ra*10)/10;inputs.KK.value=kk;D.v.KK=kk;inputs.Dinleme.value=m;D.v.Dinleme=m;refresh();msg.textContent=tx('ct_prn').replace('{a}',td).replace('{m}',m)}},tx('ct_pre'));
- var sv=h('button',{class:'btn',onclick:function(){ST.days[sel]=D;ls('ct',ST);msg.textContent='…';ctSend(sel,ST).then(function(r){if(r.ok){D.sent=Date.now();ls('ct',ST);msg.textContent=tx('ct_sent')+' ('+r.sheet+', '+r.rowDate+')'}else if(r.error==='date-mismatch')msg.textContent=tx('ct_mm').replace('{d}',r.rowDate+' ≠ '+dmS(d));else if(r.error==='no-url'||r.error==='net')msg.textContent=tx('ct_pend');else msg.textContent=(tx('ct_err')[r.error]||r.error)})}},tx('ct_save'));
+   var kk=Math.round(td/ra*10)/10;inputs.KK.value=kk;D.v.KK=kk;inputs.Dinleme.value=m;D.v.Dinleme=m;refresh();autoSave();var _m=tx('ct_prn').replace('{a}',td).replace('{m}',m);setTimeout(function(){msg.textContent=_m},50)}},tx('ct_pre'));
+ var doSave=function(){ST.days[sel]=D;ls('ct',ST);msg.textContent='…';ctSend(sel,ST).then(function(r){if(r.ok){D.sent=Date.now();ls('ct',ST);msg.textContent=tx('ct_sent')+' ('+r.sheet+', '+r.rowDate+')'}else if(r.error==='date-mismatch')msg.textContent=tx('ct_mm').replace('{d}',r.rowDate+' ≠ '+dmS(d));else if(r.error==='no-url'||r.error==='net')msg.textContent=tx('ct_pend');else msg.textContent=(tx('ct_err')[r.error]||r.error)})};
+ var atm=0;autoSave=function(){clearTimeout(atm);msg.textContent='⏳';atm=setTimeout(doSave,1200)};
+ var sv=h('button',{class:'btn',onclick:doSave},tx('ct_save'));
  app.append(h('div',{class:'ctl',style:'margin-top:12px'},[totEl]),h('div',{class:'row'},[pre,sv]),msg);
  /* haftalık özet */
  var tb=h('table',{class:'ctt'}),hd=h('tr',null,[h('th',null,'')]);['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'].forEach(function(n){hd.append(h('th',null,n))});hd.append(h('th',null,'Σ'));tb.append(hd);

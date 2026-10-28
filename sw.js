@@ -1,4 +1,4 @@
-var C='islam-v1';
+var C='islam-v2';
 self.addEventListener('install',function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(['./','index.html','manifest.webmanifest','icon.svg'])}).then(function(){self.skipWaiting()}))});
 self.addEventListener('activate',function(e){e.waitUntil(clients.claim())});
 self.addEventListener('fetch',function(e){var r=e.request;if(r.method!=='GET'||new URL(r.url).origin!==location.origin||r.headers.has('range'))return;
