@@ -1,3 +1,12 @@
 [
- {"id":"hos-geldiniz","t":"Hoş geldiniz","date":"2026-10-28","cat":"Duyuru","body":"Bu sitede kitap okuyabilir, ses kayıtlarını dinleyebilir, yazıları okuyabilir ve zikirmatiği kullanabilirsiniz.\n\nKitaplar ve sesler zamanla eklenecek. Allah hayırlara vesile eylesin."}
+ {
+  "id": "hos-geldiniz",
+  "t": "Hoş geldiniz",
+  "date": "2026-10-28",
+  "cat": "Duyuru",
+  "body": "Bu sitede kitap okuyabilir, ses kayıtlarını dinleyebilir, yazıları okuyabilir ve zikirmatiği kullanabilirsiniz.\n\nKitaplar ve sesler zamanla eklenecek. Allah hayırlara vesile eylesin.",
+  "t_kg": "Кош келиңиз",
+  "cat_kg": "Жарыя",
+  "body_kg": "Бул сайтта китеп окуп, аудио жазууларды угуп, макалаларды окуп жана зикирматикти колдонсоңуз болот.\n\nКитептер жана аудиолор убакыт өткөн сайын кошулат. Аллах жакшылыктарга себеп кылсын."
+ }
 ]
