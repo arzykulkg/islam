@@ -80,9 +80,9 @@ i.th{color:#9e9e9e}i.tl,i.ts{color:#9e9e9e}i.tn{color:#2e7d32}i.tp{color:#00897b
 .nm{cursor:pointer;position:relative}.nm .mn{display:block;text-align:center;margin-top:6px;color:var(--mut)}.grid.hm .nm .mn{display:none}.grid.hm .nm.sh .mn{display:block}
 </style></head><body>
 <header><div class="hd"><a class="logo" href="#/"><svg viewBox="0 0 100 100"><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#e8c766"/><path d="M70 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#e8c766"/></svg>İslam</a><span class="sp"></span><button class="tm" id="lg" title="Dil / Тил"></button><button class="tm" id="tm" title="Tema">🌙</button></div>
-<nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kitaplar" data-r="kitaplar">📚 Kitaplar</a><a href="#/dinle" data-r="dinle">🎧 Dinle</a><a href="#/yazilar" data-r="yazilar">✍️ Yazılar</a><a href="#/dualar" data-r="dualar">🤲 Dualar</a><a href="#/ozel" data-r="ozel">⭐ Özel</a><a href="#/namaz" data-r="namaz">🕌 Namaz</a><a href="#/cetele" data-r="cetele">📝 Çetele</a><a href="#/men" data-r="men">👤 Ben</a><a href="#/zikirmatik" data-r="zikirmatik">📿 Zikirmatik</a><a href="#/hadis" data-r="hadis">📜 Hadis</a><a href="#/esma" data-r="esma">✨ Esmâ</a><a href="#/temalar" data-r="temalar">🗂️ Temalar</a><a href="#/ramazan" data-r="ramazan">🌙 Ramazan</a><a href="#/cocuk" data-r="cocuk">🧒 Çocuk</a></nav></header>
+<nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kitaplar" data-r="kitaplar">📚 Kitaplar</a><a href="#/dinle" data-r="dinle">🎧 Dinle</a><a href="#/dualar" data-r="dualar">🤲 Dualar</a><a href="#/namaz" data-r="namaz">🕌 Namaz</a><a href="#/men" data-r="men">👤 Ben</a><a href="#/daha" data-r="daha">☰ Daha</a></nav></header>
 <main id="app"></main>
-<footer><span id="ft"></span> · <span id="yr"></span></footer>
+<footer><a id="rp" target="_blank" rel="noopener" style="color:inherit">⚠️</a> · <span id="ft"></span> · <span id="yr"></span></footer>
 <div class="player" id="pl" hidden><div class="in"><div class="row" style="justify-content:space-between;margin-bottom:4px"><b id="pt" style="font-size:14px"></b><span class="row"><select id="ps" style="width:auto;padding:4px 8px"><option value=".75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><button class="chip" id="pn">⏭</button><button class="chip" id="px">✕</button></span></div><audio id="au" controls preload="none"></audio></div></div>
 <script>
 "use strict";
@@ -132,7 +132,7 @@ function load(n){if(DATA[n])return Promise.resolve(DATA[n]);return fetch('data/'
 function home(){app.innerHTML='';
  var hp=h('div');app.append(h('h1',null,tx('bism')),h('p',{class:'lead'},tx('homelead')),hp);homePanel(hp);
  var g=h('div',{class:'grid'});
- [['📚',tx('t1'),tx('d1'),'#/kitaplar'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['🤲',tx('t5'),tx('d5'),'#/dualar'],['⭐',tx('t6'),tx('d6'),'#/ozel'],['🕌',tx('t7'),tx('d7'),'#/namaz'],['📝',tx('t9'),tx('d9'),'#/cetele'],['👤',tx('t8'),tx('d8'),'#/men'],['📿',tx('t4'),tx('d4'),'#/zikirmatik'],['📜',tx('t10'),tx('d10'),'#/hadis'],['✨',tx('t11'),tx('d11'),'#/esma'],['🗂️',tx('t12'),tx('d12'),'#/temalar'],['🌙',tx('t13'),tx('d13'),'#/ramazan'],['🧒',tx('t14'),tx('d14'),'#/cocuk']].forEach(function(x){
+ [['📚',tx('t1'),tx('d1'),'#/kitaplar'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['🤲',tx('t5'),tx('d5'),'#/dualar'],['⭐',tx('t6'),tx('d6'),'#/ozel'],['🕌',tx('t7'),tx('d7'),'#/namaz'],['📝',tx('t9'),tx('d9'),'#/cetele'],['👤',tx('t8'),tx('d8'),'#/men'],['📿',tx('t4'),tx('d4'),'#/zikirmatik'],['📜',tx('t10'),tx('d10'),'#/hadis'],['✨',tx('t11'),tx('d11'),'#/esma'],['🗂️',tx('t12'),tx('d12'),'#/temalar'],['🌙',tx('t13'),tx('d13'),'#/ramazan'],['🧒',tx('t14'),tx('d14'),'#/cocuk'],['🎓',tx('t15'),tx('d15'),'#/tecvid'],['🧎',tx('t16'),tx('d16'),'#/namazrehber'],['🌅',tx('t17'),tx('d17'),'#/zikirler'],['ℹ️',tx('t18'),tx('d18'),'#/kaynak']].forEach(function(x){
   g.append(h('a',{class:'card tile',href:x[3]},[h('div',{class:'ic'},x[0]),h('b',null,x[1]),h('span',null,x[2])]))});
  app.append(g);
  load('posts').then(function(P){if(!P.length)return;app.append(h('h2',null,tx('recent')));P.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,3).forEach(function(p){app.append(postCard(p))})})}
@@ -560,10 +560,84 @@ function cocuk(){app.innerHTML='';app.append(h('h1',null,'🧒 '+tx('kd_h')),h('
   var q=Q[qi],done=false;qb.append(h('p',{style:'font-weight:600'},(qi+1)+'. '+q[0]));q[1].forEach(function(o,i){var b=h('button',{class:'btn o',style:'display:block;width:100%;margin-bottom:8px;text-align:left',onclick:function(){if(done)return;done=true;if(i===q[2]){sc++;b.style.background='#2e7d32';b.style.color='#fff'}else{b.style.background='#c62828';b.style.color='#fff'}
    setTimeout(function(){qi++;qd()},900)}},o);qb.append(b)})}
  qd()}
-var R={hadis:hadis,esma:esma,temalar:temalar,ramazan:ramazan,cocuk:cocuk,cetele:cetele,namaz:namaz,men:men,'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir,dualar:duas,ozel:ozel,kuran:function(n,a){n?quranSura(n,a):quranList()}};
-function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];qStop();clrTM();(R[r]||home)(pp[1],pp[2]);var nr=r==='kuran'?'kitaplar':(R[r]?r:'');document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===nr)});if(r!=='kuran')window.scrollTo(0,0)}
+/* ====== Faz 2: daha, kaynaklar, tecvid dersleri, namaz rehberi, zikirler, yedekleme ====== */
+Object.assign(L.tr,{
+ nav:['Ana sayfa','📚 Kitaplar','🎧 Dinle','🤲 Dualar','🕌 Namaz','👤 Ben','☰ Daha'],
+ t15:'Tecvid Dersleri',d15:'Nun sâkin, mim sâkin, med, kalkale kuralları',t16:'Namaz Rehberi',d16:'Abdest, namaz kılınışı, rekât sayıları',t17:'Günlük Zikirler',d17:'Sabah-akşam, namaz sonrası, sefer zikirleri',t18:'Kaynaklar ve Yöntem',d18:'Verilerin kaynakları ve hata bildirimi',
+ more_h:'Tüm bölümler',rep:'⚠️ Hata bildir',
+ tc_h:'Tecvid Dersleri',tc_l:'Kısa özetler; örnekler Kur’an’dan. Hoca ile birlikte öğrenmeniz önerilir.',
+ nm_h:'Namaz Rehberi',nm_l:'Hanefî mezhebine göre kısa özet. Ayrıntı için güvenilir bir hocaya/diyanet kaynaklarına başvurun.',
+ zk_h:'Günlük Zikirler',zk_l:'Her zikrin kaynağı belirtilmiştir.',zk_kg:'Kırgızca açıklamalar taslaktır.',zk_times:'kez',zk_src:'Kaynak',
+ sr_h:'Kaynaklar ve Yöntem',sr_l:'Bu sitedeki içerik nereden geliyor?',
+ sr_items:[['Arapça metin','Uthmani Hafs metni (açık kaynaklı Kur’an veri kümesi).'],['Türkçe meal','Diyanet İşleri Başkanlığı meali.'],['Kırgızca meal','Ş. Hakimov’un Kırgızca meali.'],['Rusça meal','E. Kuliev’in Rusça meali.'],['Kelime kelime','Quran.com verisi (İngilizce anlam ve okunuş). Türkçe/Kırgızca yoktur.'],['Tecvid renkleri','Quran.com tecvid işaretlemesi.'],['Tefsir','Abdurrahman es-Sa‘dî (Tefsir Kerîm er-Rahmân), Türkçe ve Rusça çeviri; Kırgızca yoktur.'],['Kırk Hadis','İmam Nevevî; Arapça/Türkçe/İngilizce metin hadith-api (fawazahmed0) kaynaklı.'],['Kırgızca hadis ve 99 isim çevirileri','Taslak çevirilerdir; henüz bir âlim/hoca tarafından kontrol edilmemiştir.'],['Ses','Âyet sesleri: islamic.network (seçilen kâri).'],['Namaz vakitleri','Konuma göre astronomik hesaplama; yerel Diyanet/Müftülük takvimiyle birkaç dakika fark olabilir.'],['Dualar ve zikirler','Âyet veya hadis kaynağı her maddede belirtilmiştir.']],
+ sr_err:'Hata bulursanız her sayfanın altındaki “Hata bildir” bağlantısını kullanın.',
+ bk_h:'Yedekle / Geri yükle',bk_n:'Yer imleri, hedefler, okuma işaretleri ve çeteleniz bu cihazda saklanır. Başka cihaza taşımak için dışa aktarın.',bk_ex:'Dışa aktar',bk_im:'İçe aktar',bk_ok:'Geri yüklendi ✓',bk_bad:'Dosya geçersiz'});
+Object.assign(L.kg,{
+ nav:['Башкы бет','📚 Китептер','🎧 Угуу','🤲 Дубалар','🕌 Намаз','👤 Менин','☰ Дагы'],
+ t15:'Тажвид сабактары',d15:'Нун сакин, мим сакин, мадд, калкала эрежелери',t16:'Намаз колдонмосу',d16:'Дарат, намаз окулушу, ракат саны',t17:'Күндөлүк зикирлер',d17:'Эртең-кеч, намаздан кийин, сапар зикирлери',t18:'Булактар жана методология',d18:'Маалыматтардын булактары жана ката билдирүү',
+ more_h:'Бардык бөлүмдөр',rep:'⚠️ Ката билдирүү',
+ tc_h:'Тажвид сабактары',tc_l:'Кыскача баяндама; мисалдар Курандан. Устаз менен бирге үйрөнүү сунушталат.',
+ nm_h:'Намаз колдонмосу',nm_l:'Ханафий мазхабы боюнча кыскача. Кеңири маалымат үчүн ишенимдүү устазга же диний мекемеге кайрылыңыз.',
+ zk_h:'Күндөлүк зикирлер',zk_l:'Ар бир зикирдин булагы көрсөтүлгөн.',zk_kg:'Кыргызча түшүндүрмөлөр долбоор.',zk_times:'жолу',zk_src:'Булак',
+ sr_h:'Булактар жана методология',sr_l:'Бул сайттагы маалымат кайдан алынган?',
+ sr_items:[['Араб тексти','Усмани Хафс тексти (ачык булактуу Куран маалымат топтому).'],['Түркчө котормо','Түркия Дин иштери башкармалыгынын котормосу.'],['Кыргызча котормо','Ш. Хакимовдун кыргызча котормосу.'],['Орусча котормо','Э. Кулиевдин орусча котормосу.'],['Сөзмө-сөз','Quran.com маалыматы (англисче мааниси жана окулушу). Түркчө/кыргызча жок.'],['Тажвид түстөрү','Quran.com тажвид белгилөөсү.'],['Тафсир','Абдурахман ас-Саади (Тафсир Карим ар-Рахман), түркчө жана орусча котормо; кыргызча жок.'],['Кырк хадис','Имам Навави; арабча/түркчө/англисче текст hadith-api (fawazahmed0) булагынан.'],['Кыргызча хадис жана 99 ысым котормолору','Долбоор котормолор; азырынча аалым/устаз тарабынан текшерилген эмес.'],['Үн','Аят үндөрү: islamic.network (тандалган кары).'],['Намаз убакыттары','Жайгашкан жерге жараша астрономиялык эсеп; жергиликтүү диний мекеменин календары менен бир нече мүнөт айырма болушу мүмкүн.'],['Дубалар жана зикирлер','Аят же хадис булагы ар бир пунктта көрсөтүлгөн.']],
+ sr_err:'Ката тапсаңыз, ар бир беттин ылдый жагындагы “Ката билдирүү” шилтемесин колдонуңуз.',
+ bk_h:'Сактоо / Калыбына келтирүү',bk_n:'Белгилер, максаттар, окуу белгилери жана эсебиңиз ушул түзмөктө сакталат. Башка түзмөккө өткөрүү үчүн экспорттоңуз.',bk_ex:'Экспорт',bk_im:'Импорт',bk_ok:'Калыбына келди ✓',bk_bad:'Файл жараксыз'});
+function srcLink(){var u='https://github.com/arzykulkg/islam/issues/new?title='+encodeURIComponent('Hata: '+location.hash)+'&body='+encodeURIComponent('Sayfa: '+location.href+'\n\nHata / Ката:\n');return u}
+/* daha */
+function daha(){app.innerHTML='';app.append(h('h1',null,tx('more_h')));var g=h('div',{class:'grid'});
+ [['📖',tx('qh'),tx('qd'),'#/kuran'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['⭐',tx('t6'),tx('d6'),'#/ozel'],['📝',tx('t9'),tx('d9'),'#/cetele'],['📿',tx('t4'),tx('d4'),'#/zikirmatik'],['📜',tx('t10'),tx('d10'),'#/hadis'],['✨',tx('t11'),tx('d11'),'#/esma'],['🗂️',tx('t12'),tx('d12'),'#/temalar'],['🌙',tx('t13'),tx('d13'),'#/ramazan'],['🧒',tx('t14'),tx('d14'),'#/cocuk'],['🎓',tx('t15'),tx('d15'),'#/tecvid'],['🧎',tx('t16'),tx('d16'),'#/namazrehber'],['🌅',tx('t17'),tx('d17'),'#/zikirler'],['ℹ️',tx('t18'),tx('d18'),'#/kaynak']].forEach(function(x){g.append(h('a',{class:'card tile',href:x[3]},[h('div',{class:'ic'},x[0]),h('b',null,x[1]),h('span',null,x[2])]))});app.append(g)}
+/* kaynaklar + yedek */
+function kaynak(){app.innerHTML='';app.append(h('h1',null,tx('sr_h')),h('p',{class:'lead'},tx('sr_l')));
+ var ul=h('div',{class:'card'});tx('sr_items').forEach(function(x){ul.append(h('p',{style:'margin:0 0 10px'},[h('b',null,x[0]+': '),x[1]]))});app.append(ul,h('p',{class:'lead',style:'font-size:14px'},tx('sr_err')),h('a',{class:'btn o',href:srcLink(),target:'_blank',rel:'noopener'},tx('rep')));
+ var KEYS=['bm','rd','rdd','goal','hf','ib','zk','qlast','qla','qfs','rmt','lis','ct','city','loc','rc','rep','qtl'];
+ var ex=h('button',{class:'btn',onclick:function(){var o={};KEYS.forEach(function(k){var v=ls(k);if(v!==null)o[k]=v});var blob=new Blob([JSON.stringify(o)],{type:'application/json'}),a=h('a',{href:URL.createObjectURL(blob),download:'islam-yedek-'+today()+'.json'});document.body.append(a);a.click();a.remove()}},tx('bk_ex'));
+ var fi=h('input',{type:'file',accept:'application/json',style:'display:none',onchange:function(){var f=fi.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var o=JSON.parse(r.result);if(typeof o!=='object'||!o)throw 0;Object.keys(o).forEach(function(k){if(KEYS.indexOf(k)>=0)ls(k,o[k])});toast(tx('bk_ok'))}catch(e){toast(tx('bk_bad'))}};r.readAsText(f)}});
+ app.append(h('h2',null,tx('bk_h')),h('div',{class:'card'},[h('p',{style:'margin-top:0'},tx('bk_n')),h('div',{class:'row'},[ex,h('button',{class:'btn o',onclick:function(){fi.click()}},tx('bk_im')),fi])]))}
+/* tecvid dersleri */
+var TCV=[
+ {t:['Nun sâkin ve tenvin','Нун сакин жана танвин'],items:[
+  ['İzhâr','Изхар','Boğaz harfleri (ء ه ع ح غ خ) önünde nun/tenvin açık okunur.','Тамак тамгалары (ء ه ع ح غ خ) алдында нун/танвин ачык окулат.','مَنْ آمَنَ','5:69'],
+  ['İdğâm','Идгам','Harfler: ي ر م ل و ن (يرملون). Gunneli: ي ن م و; gunnesiz: ل ر.','Тамгалар: ي ر م ل و ن. Гунна менен: ي ن م و; гуннасыз: ل ر.','مَنْ يَقُولُ','2:8'],
+  ['İklâb','Иклаб','Nun/tenvin, ب harfi önünde mim sesine çevrilir ve gunneli okunur.','Нун/танвин ب тамгасынын алдында мим үнүнө айланып, гунна менен окулат.','مِنْ بَعْدِ','2:27'],
+  ['İhfâ','Ихфа','Kalan 15 harf önünde nun/tenvin gizlenir, gunneli okunur.','Калган 15 тамганын алдында нун/танвин жашырылып, гунна менен окулат.','مِنْ قَبْلُ','2:25']]},
+ {t:['Mim sâkin','Мим сакин'],items:[
+  ['İhfâ-i şefevî','Ихфа шафавий','Mim sâkin, ب önünde dudaklarla gizlenir.','Мим сакин ب алдында эриндер менен жашырылат.','تَرْمِيهِمْ بِحِجَارَةٍ','105:4'],
+  ['İdğâm-i şefevî','Идгам шафавий','Mim sâkin, mim önünde idğam edilir.','Мим сакин мимдин алдында идгам болот.','لَهُمْ مَا','2:25'],
+  ['İzhâr-ı şefevî','Изхар шафавий','Mim sâkin, diğer harfler önünde açık okunur.','Мим сакин башка тамгалар алдында ачык окулат.','أَنْعَمْتَ','1:7']]},
+ {t:['Med (uzatma)','Мадд (узартуу)'],items:[
+  ['Tabiî med','Табий мадд','2 hareke uzatılır; med harfinden sonra hemze veya sükûn yoksa.','2 харакат узартылат; мадд тамгасынан кийин хамза же сукун жок болсо.','قَالَ','2:30'],
+  ['Muttasıl/münfasıl med','Муттасил/мунфасил мадд','Med harfinden sonra hemze gelirse uzatılır (4–5 hareke).','Мадд тамгасынан кийин хамза келсе узартылат (4–5 харакат).','جَاءَ','2:1']]},
+ {t:['Kalkale','Калкала'],items:[
+  ['Kalkale','Калкала','ق ط ب ج د harfleri sâkin iken yansıtılarak okunur.','ق ط ب ج د тамгалары сакин болгондо чайпалып окулат.','أَحَدٌ','112:1']]}];
+function tecvid(){app.innerHTML='';app.append(h('h1',null,tx('tc_h')),h('p',{class:'lead'},tx('tc_l')));var k=lang==='kg'?1:0;
+ TCV.forEach(function(g){app.append(h('h2',null,g.t[k]));g.items.forEach(function(x){app.append(h('div',{class:'card',style:'margin-bottom:10px'},[h('b',null,x[k]),h('p',{style:'margin:6px 0'},x[2+k]),h('p',{class:'ar sm'},x[4]),h('a',{class:'chip',href:'#/kuran/'+x[5].split(':')[0]+'/'+x[5].split(':')[1],style:'text-decoration:none'},x[5])]))})});
+ app.append(h('a',{class:'btn g',href:'#/kuran/1',style:'margin-top:10px'},'🎨 '+tx('tjh')))}
+/* namaz rehberi */
+var NMZ={tr:[['Abdest',['Niyet edip besmele çekilir.','Eller bileklere kadar 3 kez yıkanır.','Ağıza 3 kez su verilir.','Buruna 3 kez su verilir.','Yüz 3 kez yıkanır.','Kollar dirseklerle beraber 3 kez yıkanır (önce sağ).','Başın dörtte biri meshedilir; kulaklar meshedilir.','Ayaklar topuklarla beraber 3 kez yıkanır (önce sağ).']],['Namazın kılınışı',['Kıbleye dönüp niyet edilir.','Tekbir (Allâhü ekber) ile namaza başlanır, eller bağlanır.','Kıyam: Sübhâneke, Fâtiha ve bir sûre okunur.','Rükû: “Sübhâne rabbiye’l-azîm” (3 kez).','Doğrulma: “Semi‘allâhü limen hamideh, Rabbenâ lekel-hamd”.','Secde: “Sübhâne rabbiye’l-a‘lâ” (3 kez); iki secde yapılır.','Oturuş: Ettehiyyâtü, Salli-Barik ve Rabbena duaları.','Selâm: sağa ve sola “Es-selâmü aleyküm ve rahmetullâh”.']],['Farz rekât sayıları',['Sabah: 2','Öğle: 4','İkindi: 4','Akşam: 3','Yatsı: 4 (+ vitir 3, Hanefî)']]],
+ kg:[['Тахарат (дарат)',['Ниет кылып бисмиллах айтылат.','Эки кол билекке чейин 3 жолу жуулат.','Оозго 3 жолу суу алынат.','Мурунга 3 жолу суу алынат.','Бет 3 жолу жуулат.','Колдор чыканакка чейин 3 жолу жуулат (оң биринчи).','Баштын төрттөн бири мезгилет; кулактар мезгилет.','Буттар согончок менен 3 жолу жуулат (оң биринчи).']],['Намаз окулушу',['Кыбылага бурулуп ниет кылынат.','Такбир (Аллаху акбар) менен намаз башталып, колдор байланат.','Кыям: Субханакә, Фатиха жана бир сүрө окулат.','Рукуу: «Субхана раббиял-азим» (3 жолу).','Туруу: «Самиаллаху лиман хамидә, Раббана лакал-хамд».','Сажда: «Субхана раббиял-аъла» (3 жолу); эки сажда жасалат.','Отуруу: Аттахият, Салли-Барик жана Раббана дубалары.','Салам: оңго жана солго «Ассаламу алайкум ва рахматуллах».']],['Парз ракат саны',['Багымдат: 2','Бешим: 4','Аср: 4','Шам: 3','Куптан: 4 (+ витир 3, ханафий)']]]};
+function namazrehber(){app.innerHTML='';app.append(h('h1',null,tx('nm_h')),h('p',{class:'lead'},tx('nm_l')));NMZ[lang].forEach(function(s){app.append(h('h2',null,s[0]),h('div',{class:'card'},h('ol',{style:'line-height:1.9;margin:0;padding-left:22px'},s[1].map(function(x){return h('li',null,x)}))))});
+ app.append(h('a',{class:'btn g',href:'#/namaz',style:'margin-top:10px'},'🕌 '+tx('t7')))}
+/* günlük zikirler */
+var ZKR=[
+ {t:['Sabah-akşam','Эртең-кеч'],items:[
+  ['بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ',3,'Ebû Dâvûd, Tirmizî','Абу Дауд, Тирмизи','Allah’ın adıyla ki O’nun adıyla birlikte yerde ve gökte hiçbir şey zarar vermez.','Аллахтын аты менен; Анын аты менен жерде да, асманда да эч нерсе зыян келтире албайт.'],
+  ['سُبْحَانَ اللَّهِ وَبِحَمْدِهِ',100,'Müslim','Муслим','Allah’ı hamd ile tesbih ederim.','Аллахты мактоо менен тасбих кылам.'],
+  ['قُلْ هُوَ اللَّهُ أَحَدٌ ‏— ‏قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ‏— ‏قُلْ أَعُوذُ بِرَبِّ النَّاسِ',3,'Ebû Dâvûd, Tirmizî','Абу Дауд, Тирмизи','İhlâs, Felak ve Nâs sûreleri.','Ихлас, Фалак жана Нас сүрөлөрү.']]},
+ {t:['Namaz sonrası','Намаздан кийин'],items:[
+  ['أَسْتَغْفِرُ اللَّهَ',3,'Müslim','Муслим','Allah’tan bağışlanma dilerim.','Аллахтан кечирим сурайм.'],
+  ['سُبْحَانَ اللَّهِ',33,'Buhârî, Müslim','Бухари, Муслим','Sübhânallah.','Субханаллах.'],
+  ['الْحَمْدُ لِلَّهِ',33,'Buhârî, Müslim','Бухари, Муслим','Elhamdülillah.','Алхамдулиллах.'],
+  ['اللَّهُ أَكْبَرُ',34,'Buhârî, Müslim','Бухари, Муслим','Allâhü ekber.','Аллаху акбар.']]},
+ {t:['Sefer','Сапар'],items:[
+  ['سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ',1,'Zuhruf 13-14','Зухруф 13-14','Bunu bizim buyruğumuza veren Allah’ı tenzih ederiz; biz buna güç yetiremezdik. Biz elbette Rabbimize döneceğiz.','Муну бизге моюн сундурган Аллахты ыйык деп эсептейбиз; биз буга күчүбүз жетмек эмес. Биз албетте Раббибизге кайтабыз.']]}];
+function zikirler(){app.innerHTML='';app.append(h('h1',null,tx('zk_h')),h('p',{class:'lead'},tx('zk_l')));if(lang==='kg')app.append(h('div',{class:'card',style:'border-color:var(--gold);margin-bottom:12px;font-size:14px'},tx('zk_kg')));var k=lang==='kg'?1:0;
+ ZKR.forEach(function(g){app.append(h('h2',null,g.t[k]));g.items.forEach(function(x){app.append(h('div',{class:'card dua',style:'margin-bottom:10px'},[h('div',{class:'ref'},x[1]+' '+tx('zk_times')+' · '+tx('zk_src')+': '+x[2+k]),h('p',{class:'ar sm'},x[0]),h('p',{class:'vtr',style:'display:block'},x[4+k]),h('button',{class:'chip',onclick:function(){copyText(this,x[0]+'\n'+x[4+k])}},'📋')]))})});
+ app.append(h('a',{class:'btn g',href:'#/zikirmatik',style:'margin-top:10px'},'📿 '+tx('t4')))}
+var R={daha:daha,kaynak:kaynak,tecvid:tecvid,namazrehber:namazrehber,zikirler:zikirler,hadis:hadis,esma:esma,temalar:temalar,ramazan:ramazan,cocuk:cocuk,cetele:cetele,namaz:namaz,men:men,'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir,dualar:duas,ozel:ozel,kuran:function(n,a){n?quranSura(n,a):quranList()}};
+function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];qStop();clrTM();(R[r]||home)(pp[1],pp[2]);var nr=r==='kuran'?'kitaplar':(R[r]?r:'');if(!document.querySelector('#nav a[data-r="'+nr+'"]'))nr='daha';document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===nr)});if(r!=='kuran')window.scrollTo(0,0)}
 addEventListener('hashchange',route);
 $('#lg').onclick=function(){lang=lang==='tr'?'kg':'tr';try{localStorage.setItem('lang',lang)}catch(e){}applyLang();route()};
-applyLang();route();
+function rpUp(){var a=$('#rp');a.href=srcLink();a.textContent=tx('rep')}addEventListener('hashchange',rpUp);var _al=applyLang;applyLang=function(){_al();rpUp()};applyLang();route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
 </script></body></html>
