@@ -416,7 +416,7 @@ function cetele(){app.innerHTML='';var sel=ls('ctsel')||today(),ST=ls('ct')||{da
  var links={Fetih:48,Yasin:36,'Mülk':67};
  CT_CHK.forEach(function(k){var cb=h('input',{type:'checkbox',style:'width:20px;height:20px;margin-right:10px'});cb.checked=!!D.c[k];cb.onchange=function(){D.c[k]=cb.checked};ck.append(h('label',{style:'display:flex;align-items:center;padding:7px 0;cursor:pointer'},[cb,h('span',{style:'flex:1'},k),links[k]?h('a',{href:'#/kuran/'+links[k],class:'chip',style:'text-decoration:none'},'📖'):''])) });
  var msg=h('p',{class:'lead',style:'margin:8px 0'});
- var pre=h('button',{class:'btn o',onclick:function(){var a=Object.keys(ls('rd')||{}).length,ra=+((ls('ctset')||{}).ratio)||10,td=(ls('rdd')||{})[sel]||0,m=Math.round(((ls('lis')||{})[sel]||0)/60);
+ var pre=h('button',{class:'btn o',onclick:function(){var a=Object.keys(ls('rd')||{}).length,ra=+((ls('ctset')||{}).ratio)||10.3,td=(ls('rdd')||{})[sel]||0,m=Math.round(((ls('lis')||{})[sel]||0)/60);
    var kk=Math.round(td/ra*10)/10;inputs.KK.value=kk;D.v.KK=kk;inputs.Dinleme.value=m;D.v.Dinleme=m;refresh();msg.textContent=tx('ct_prn').replace('{a}',td).replace('{m}',m)}},tx('ct_pre'));
  var sv=h('button',{class:'btn',onclick:function(){ST.days[sel]=D;ls('ct',ST);msg.textContent='…';ctSend(sel,ST).then(function(r){if(r.ok){D.sent=Date.now();ls('ct',ST);msg.textContent=tx('ct_sent')+' ('+r.sheet+', '+r.rowDate+')'}else if(r.error==='date-mismatch')msg.textContent=tx('ct_mm').replace('{d}',r.rowDate+' ≠ '+dmS(d));else if(r.error==='no-url'||r.error==='net')msg.textContent=tx('ct_pend');else msg.textContent=(tx('ct_err')[r.error]||r.error)})}},tx('ct_save'));
  app.append(h('div',{class:'ctl',style:'margin-top:12px'},[totEl]),h('div',{class:'row'},[pre,sv]),msg);
@@ -428,7 +428,7 @@ function cetele(){app.innerHTML='';var sel=ls('ctsel')||today(),ST=ls('ct')||{da
  var S=ls('ctset')||{},f=function(k,l,t,ph){var i=h('input',{type:t||'text',value:S[k]||'',placeholder:ph||'',style:'width:100%'});i.oninput=function(){S[k]=i.value.trim();ls('ctset',S)};return h('label',{style:'display:block;margin:8px 0'},[h('small',{style:'color:var(--mut)'},l),i])};
  var tr2=h('p',null),set=h('details',{class:'card',style:'margin-top:16px'},[h('summary',{style:'cursor:pointer;font-weight:700'},tx('ct_set')),h('ol',{style:'color:var(--mut);padding-left:18px'},tx('ct_help').map(function(s){return h('li',null,s.replace(/^\d\) /,''))})),
   h('button',{class:'chip',onclick:function(){var b=this;fetch('cetele.gs').then(function(r){return r.text()}).then(function(t){copyText(b,t)})}},tx('ct_copy')),
-  f('url',tx('ct_url'),'url','https://script.google.com/macros/s/…/exec'),f('key',tx('ct_key'),'password'),f('sheet',tx('ct_sheet')),f('person',tx('ct_person'),'text','Name 3'),f('ratio',tx('ct_ratio'),'number','10'),
+  f('url',tx('ct_url'),'url','https://script.google.com/macros/s/…/exec'),f('key',tx('ct_key'),'password'),f('sheet',tx('ct_sheet')),f('person',tx('ct_person'),'text','Name 3'),f('ratio',tx('ct_ratio'),'number','10.3'),
   h('button',{class:'btn o',onclick:function(){var s=ls('ctset')||{};tr2.textContent='…';fetch(s.url+(s.url.indexOf('?')>=0?'&':'?')+'key='+encodeURIComponent(s.key||'')).then(function(r){return r.json()}).then(function(j){tr2.textContent=j.ok&&j.keyOk?tx('ct_ok'):tx('ct_bad')}).catch(function(){tr2.textContent=tx('ct_bad')})}},tx('ct_test')),tr2]);
  app.append(set)}
 function duas(){app.innerHTML='';app.append(h('h1',null,tx('duh')),h('p',{class:'lead'},tx('dul')));
