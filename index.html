@@ -375,6 +375,7 @@ function homePanel(box){var n=nextPrayer(),L0=curLoc(),dn=Math.floor(Date.now()/
  tk();TM.push(setInterval(tk,1000));box.append(np);
  var last=ls('qlast');if(last)qIndex().then(function(I){box.insertBefore(h('a',{class:'btn g',href:'#/kuran/'+last+(ls('qla')?'/'+ls('qla'):''),style:'margin:0 0 12px;display:block;text-align:center'},tx('cont2')+': '+I[lang][last-1]),np.nextSibling)});
  var da=DAYAY[dn%DAYAY.length];Promise.all([qIndex(),qSura(da[0])]).then(function(x){var I=x[0],S=x[1];box.append(h('div',{class:'card dua'},[h('div',{class:'ref'},tx('dayay')+' · '+I[lang][da[0]-1]+' '+da[0]+':'+da[1]),h('p',{class:'ar sm'},S.a[da[1]-1]),h('p',{class:'vtr',style:'display:block'},S[lang][da[1]-1]),h('a',{class:'chip',href:'#/kuran/'+da[0]+'/'+da[1],style:'text-decoration:none;display:inline-block'},'→')]))});
+ load('hadith40').then(function(H){if(!H.length)return;var x=H[dn%H.length];box.append(h('a',{class:'card dua',href:'#/hadis',style:'display:block;text-decoration:none;color:inherit'},[h('div',{class:'ref'},tx('dayhd')+' · '+(lang==='kg'?'Навави':'Nevevî')+' '+x.n),h('p',{class:'ar sm'},x.ar),h('p',{class:'vtr',style:'display:block'},lang==='kg'?x.kg:x.tr)]))});
  load('duas').then(function(P){var all=[];P.forEach(function(p){p.items.forEach(function(it){all.push(it)})});if(!all.length)return;var it=all[dn%all.length];qIndex().then(function(I){box.append(h('div',{class:'card dua'},[h('div',{class:'ref'},tx('daydua')+' · '+I[lang][it.s-1]+' '+it.s+':'+it.a1),h('p',{class:'ar sm'},it.ar),h('p',{class:'vtr',style:'display:block'},it[lang])]))})})}
 /* ====== Çetele ====== */
 Object.assign(L.tr,{t9:'Çetele',d9:'Günlük/haftalık ibadet çetelesi, Google Tabloya otomatik yazar',
@@ -561,7 +562,7 @@ function cocuk(){app.innerHTML='';app.append(h('h1',null,'🧒 '+tx('kd_h')),h('
    setTimeout(function(){qi++;qd()},900)}},o);qb.append(b)})}
  qd()}
 /* ====== Faz 2: daha, kaynaklar, tecvid dersleri, namaz rehberi, zikirler, yedekleme ====== */
-Object.assign(L.tr,{
+Object.assign(L.tr,{dayhd:'Günün hadisi',
  nav:['Ana sayfa','📚 Kitaplar','🎧 Dinle','🤲 Dualar','🕌 Namaz','👤 Ben','☰ Daha'],
  t15:'Tecvid Dersleri',d15:'Nun sâkin, mim sâkin, med, kalkale kuralları',t16:'Namaz Rehberi',d16:'Abdest, namaz kılınışı, rekât sayıları',t17:'Günlük Zikirler',d17:'Sabah-akşam, namaz sonrası, sefer zikirleri',t18:'Kaynaklar ve Yöntem',d18:'Verilerin kaynakları ve hata bildirimi',
  more_h:'Tüm bölümler',rep:'⚠️ Hata bildir',
@@ -572,7 +573,7 @@ Object.assign(L.tr,{
  sr_items:[['Arapça metin','Uthmani Hafs metni (açık kaynaklı Kur’an veri kümesi).'],['Türkçe meal','Diyanet İşleri Başkanlığı meali.'],['Kırgızca meal','Ş. Hakimov’un Kırgızca meali.'],['Rusça meal','E. Kuliev’in Rusça meali.'],['Kelime kelime','Quran.com verisi (İngilizce anlam ve okunuş). Türkçe/Kırgızca yoktur.'],['Tecvid renkleri','Quran.com tecvid işaretlemesi.'],['Tefsir','Abdurrahman es-Sa‘dî (Tefsir Kerîm er-Rahmân), Türkçe ve Rusça çeviri; Kırgızca yoktur.'],['Kırk Hadis','İmam Nevevî; Arapça/Türkçe/İngilizce metin hadith-api (fawazahmed0) kaynaklı.'],['Kırgızca hadis ve 99 isim çevirileri','Taslak çevirilerdir; henüz bir âlim/hoca tarafından kontrol edilmemiştir.'],['Ses','Âyet sesleri: islamic.network (seçilen kâri).'],['Namaz vakitleri','Konuma göre astronomik hesaplama; yerel Diyanet/Müftülük takvimiyle birkaç dakika fark olabilir.'],['Dualar ve zikirler','Âyet veya hadis kaynağı her maddede belirtilmiştir.']],
  sr_err:'Hata bulursanız her sayfanın altındaki “Hata bildir” bağlantısını kullanın.',
  bk_h:'Yedekle / Geri yükle',bk_n:'Yer imleri, hedefler, okuma işaretleri ve çeteleniz bu cihazda saklanır. Başka cihaza taşımak için dışa aktarın.',bk_ex:'Dışa aktar',bk_im:'İçe aktar',bk_ok:'Geri yüklendi ✓',bk_bad:'Dosya geçersiz'});
-Object.assign(L.kg,{
+Object.assign(L.kg,{dayhd:'Күндүн хадиси',
  nav:['Башкы бет','📚 Китептер','🎧 Угуу','🤲 Дубалар','🕌 Намаз','👤 Менин','☰ Дагы'],
  t15:'Тажвид сабактары',d15:'Нун сакин, мим сакин, мадд, калкала эрежелери',t16:'Намаз колдонмосу',d16:'Дарат, намаз окулушу, ракат саны',t17:'Күндөлүк зикирлер',d17:'Эртең-кеч, намаздан кийин, сапар зикирлери',t18:'Булактар жана методология',d18:'Маалыматтардын булактары жана ката билдирүү',
  more_h:'Бардык бөлүмдөр',rep:'⚠️ Ката билдирүү',
