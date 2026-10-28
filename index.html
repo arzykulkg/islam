@@ -80,7 +80,7 @@ i.th{color:#9e9e9e}i.tl,i.ts{color:#9e9e9e}i.tn{color:#2e7d32}i.tp{color:#00897b
 .nm{cursor:pointer;position:relative}.nm .mn{display:block;text-align:center;margin-top:6px;color:var(--mut)}.grid.hm .nm .mn{display:none}.grid.hm .nm.sh .mn{display:block}
 </style></head><body>
 <header><div class="hd"><a class="logo" href="#/"><svg viewBox="0 0 100 100"><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#e8c766"/><path d="M70 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#e8c766"/></svg>İslam</a><span class="sp"></span><button class="tm" id="lg" title="Dil / Тил"></button><button class="tm" id="tm" title="Tema">🌙</button></div>
-<nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kitaplar" data-r="kitaplar">📚 Kitaplar</a><a href="#/dinle" data-r="dinle">🎧 Dinle</a><a href="#/dualar" data-r="dualar">🤲 Dualar</a><a href="#/namaz" data-r="namaz">🕌 Namaz</a><a href="#/men" data-r="men">👤 Ben</a><a href="#/daha" data-r="daha">☰ Daha</a></nav></header>
+<nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kuran" data-r="kuran">📖 Kur’an</a><a href="#/ibadet" data-r="ibadet">🤲 İbadet</a><a href="#/kutuphane" data-r="kutuphane">📚 Kütüphane</a><a href="#/men" data-r="men">👤 Ben</a></nav></header>
 <main id="app"></main>
 <footer><a id="rp" target="_blank" rel="noopener" style="color:inherit">⚠️</a> · <span id="ft"></span> · <span id="yr"></span></footer>
 <div class="player" id="pl" hidden><div class="in"><div class="row" style="justify-content:space-between;margin-bottom:4px"><b id="pt" style="font-size:14px"></b><span class="row"><select id="ps" style="width:auto;padding:4px 8px"><option value=".75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><button class="chip" id="pn">⏭</button><button class="chip" id="px">✕</button></span></div><audio id="au" controls preload="none"></audio></div></div>
@@ -130,7 +130,7 @@ var app=$('#app'),DATA={};
 function load(n){if(DATA[n])return Promise.resolve(DATA[n]);return fetch('data/'+n+'.json?v='+Date.now()).then(function(r){return r.json()}).catch(function(){return[]}).then(function(d){return DATA[n]=d})}
 /* ---------- home ---------- */
 function home(){app.innerHTML='';
- var hp=h('div');app.append(h('h1',null,tx('bism')),h('p',{class:'lead'},tx('homelead')),hp);homePanel(hp);
+ var hp=h('div');app.append(h('h1',null,tx('bism')),h('p',{class:'lead'},tx('homelead')),searchBox(),hp);homePanel(hp);
  var g=h('div',{class:'grid'});
  [['📚',tx('t1'),tx('d1'),'#/kitaplar'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['🤲',tx('t5'),tx('d5'),'#/dualar'],['⭐',tx('t6'),tx('d6'),'#/ozel'],['🕌',tx('t7'),tx('d7'),'#/namaz'],['📝',tx('t9'),tx('d9'),'#/cetele'],['👤',tx('t8'),tx('d8'),'#/men'],['📿',tx('t4'),tx('d4'),'#/zikirmatik'],['📜',tx('t10'),tx('d10'),'#/hadis'],['✨',tx('t11'),tx('d11'),'#/esma'],['🗂️',tx('t12'),tx('d12'),'#/temalar'],['🌙',tx('t13'),tx('d13'),'#/ramazan'],['🧒',tx('t14'),tx('d14'),'#/cocuk'],['🎓',tx('t15'),tx('d15'),'#/tecvid'],['🧎',tx('t16'),tx('d16'),'#/namazrehber'],['🌅',tx('t17'),tx('d17'),'#/zikirler'],['ℹ️',tx('t18'),tx('d18'),'#/kaynak']].forEach(function(x){
   g.append(h('a',{class:'card tile',href:x[3]},[h('div',{class:'ic'},x[0]),h('b',null,x[1]),h('span',null,x[2])]))});
@@ -271,7 +271,7 @@ function shareAyah(ar,trt,ref){var W=1080,pad=84,mc=document.createElement('canv
   y+=36;c.font='700 30px Inter,sans-serif';c.fillStyle='#d4b25c';c.fillText(ref,W/2,y);c.font='22px Inter,sans-serif';c.fillStyle='#a9c9bd';c.fillText('arzykulkg.github.io/islam',W/2,H-56);
   cv.toBlob(function(b){var f=new File([b],'ayet.png',{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]}))navigator.share({files:[f]}).catch(function(){});else{var a=h('a',{href:URL.createObjectURL(b),download:'ayet.png'});document.body.append(a);a.click();a.remove()}})})}
 /* ---- Kur'an: liste + arama ---- */
-function quranList(){app.innerHTML='';app.append(h('h1',null,tx('qh')),h('p',{class:'lead'},tx('qd')));
+function quranList(){app.innerHTML='';app.append(h('h1',null,tx('qh')),h('p',{class:'lead'},tx('qd')),h('div',{class:'chips'},[['🗂️',tx('t12'),'#/temalar'],['🎓',tx('t15'),'#/tecvid'],['🎨',tx('tjh'),'#/kuran/1']].map(function(c){return h('a',{class:'chip',href:c[2],style:'text-decoration:none'},c[0]+' '+c[1])})));
  var q=h('input',{type:'search',placeholder:tx('qs')}),cont=h('div'),list=h('div',{class:'grid'});
  var sq=h('input',{type:'search',placeholder:tx('ss_ph'),style:'flex:1'}),sres=h('div'),sb=h('button',{class:'btn'},tx('ss_go'));
  var vl=voiceLang();app.append(q,h('div',{style:'height:12px'}),cont,list,h('h2',null,tx('ss_h')),h('div',{class:'row'},[sq,voiceBtn(sq,function(){search()},vl),vl,sb]),sres);
@@ -635,8 +635,34 @@ var ZKR=[
 function zikirler(){app.innerHTML='';app.append(h('h1',null,tx('zk_h')),h('p',{class:'lead'},tx('zk_l')));if(lang==='kg')app.append(h('div',{class:'card',style:'border-color:var(--gold);margin-bottom:12px;font-size:14px'},tx('zk_kg')));var k=lang==='kg'?1:0;
  ZKR.forEach(function(g){app.append(h('h2',null,g.t[k]));g.items.forEach(function(x){app.append(h('div',{class:'card dua',style:'margin-bottom:10px'},[h('div',{class:'ref'},x[1]+' '+tx('zk_times')+' · '+tx('zk_src')+': '+x[2+k]),h('p',{class:'ar sm'},x[0]),h('p',{class:'vtr',style:'display:block'},x[4+k]),h('button',{class:'chip',onclick:function(){copyText(this,x[0]+'\n'+x[4+k])}},'📋')]))})});
  app.append(h('a',{class:'btn g',href:'#/zikirmatik',style:'margin-top:10px'},'📿 '+tx('t4')))}
-var R={daha:daha,kaynak:kaynak,tecvid:tecvid,namazrehber:namazrehber,zikirler:zikirler,hadis:hadis,esma:esma,temalar:temalar,ramazan:ramazan,cocuk:cocuk,cetele:cetele,namaz:namaz,men:men,'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir,dualar:duas,ozel:ozel,kuran:function(n,a){n?quranSura(n,a):quranList()}};
-function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];qStop();clrTM();(R[r]||home)(pp[1],pp[2]);var nr=r==='kuran'?'kitaplar':(R[r]?r:'');if(!document.querySelector('#nav a[data-r="'+nr+'"]'))nr='daha';document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===nr)});if(r!=='kuran')window.scrollTo(0,0)}
+/* ====== Faz 3: 5'li menü, merkezler, evrensel arama ====== */
+Object.assign(L.tr,{nav:['Ana sayfa','📖 Kur’an','🤲 İbadet','📚 Kütüphane','👤 Ben'],
+ hub_ib:'İbadet',hub_ibd:'Dualar, zikir, namaz, Ramazan, çetele',hub_kt:'Kütüphane',hub_ktd:'Kitaplar, ses, hadis, yazılar, 99 isim, çocuk',
+ s_all:'Her şeyde ara (Kur’an, dua, hadis, isim…)',s_go:'Ara',s_h:'Arama sonuçları',s_none:'Sonuç bulunamadı.',s_q:'Kur’an',s_d:'Dua',s_hd:'Hadis',s_n:'İsim',s_t:'Konu',s_b:'Kitap/Yazı'});
+Object.assign(L.kg,{nav:['Башкы бет','📖 Куран','🤲 Ибадат','📚 Китепкана','👤 Менин'],
+ hub_ib:'Ибадат',hub_ibd:'Дубалар, зикир, намаз, Рамазан, эсеп',hub_kt:'Китепкана',hub_ktd:'Китептер, үн, хадис, макалалар, 99 ысым, балдар',
+ s_all:'Бардыгынан издөө (Куран, дуба, хадис, ысым…)',s_go:'Издөө',s_h:'Издөө жыйынтыгы',s_none:'Табылган жок.',s_q:'Куран',s_d:'Дуба',s_hd:'Хадис',s_n:'Ысым',s_t:'Тема',s_b:'Китеп/Макала'});
+function hub(title,lead,items){app.innerHTML='';app.append(h('h1',null,title),h('p',{class:'lead'},lead));var g=h('div',{class:'grid'});items.forEach(function(x){g.append(h('a',{class:'card tile',href:x[3]},[h('div',{class:'ic'},x[0]),h('b',null,x[1]),h('span',null,x[2])]))});app.append(g)}
+function ibadet(){hub(tx('hub_ib'),tx('hub_ibd'),[['🤲',tx('t5'),tx('d5'),'#/dualar'],['🌅',tx('t17'),tx('d17'),'#/zikirler'],['📿',tx('t4'),tx('d4'),'#/zikirmatik'],['🕌',tx('t7'),tx('d7'),'#/namaz'],['🧎',tx('t16'),tx('d16'),'#/namazrehber'],['🌙',tx('t13'),tx('d13'),'#/ramazan'],['📝',tx('t9'),tx('d9'),'#/cetele'],['⭐',tx('t6'),tx('d6'),'#/ozel']])}
+function kutuphane(){hub(tx('hub_kt'),tx('hub_ktd'),[['📚',tx('t1'),tx('d1'),'#/kitaplar'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['📜',tx('t10'),tx('d10'),'#/hadis'],['✨',tx('t11'),tx('d11'),'#/esma'],['🧒',tx('t14'),tx('d14'),'#/cocuk'],['ℹ️',tx('t18'),tx('d18'),'#/kaynak']])}
+function searchBox(val){var q=h('input',{type:'search',placeholder:tx('s_all'),value:val||'',style:'flex:1'}),vl=voiceLang();var go=function(){var t=q.value.trim();if(t)location.hash='#/ara/'+encodeURIComponent(t)};
+ q.onkeydown=function(e){if(e.key==='Enter')go()};return h('div',{class:'row',style:'margin-bottom:12px'},[q,voiceBtn(q,go,vl),h('button',{class:'btn',onclick:go},tx('s_go'))])}
+function ara(q){q=decodeURIComponent(q||'').trim();app.innerHTML='';app.append(h('h1',null,tx('s_h')),searchBox(q));if(q.length<2)return;var out=h('div'),low=q.toLowerCase(),isA=/[؀-ۿ]/.test(q),qa=isA?arNorm(q):'';app.append(out);
+ function sec(lbl,rows){if(!rows.length)return;out.append(h('h2',null,lbl+' ('+rows.length+')'));rows.slice(0,15).forEach(function(r){out.append(h('a',{class:'card',style:'display:block;text-decoration:none;color:inherit;margin-bottom:8px',href:r[0]},[h('div',{style:'font-size:13px;color:var(--gold);font-weight:700'},r[1]),h('div',null,r[2])]))})}
+ var hit=function(s){return String(s||'').toLowerCase().indexOf(low)>=0},hitA=function(s){return isA&&arNorm(String(s||'')).indexOf(qa)>=0};
+ Promise.all([qIndex(),load('duas'),load('hadith40'),load('names99'),load('themes'),load('books'),load('posts')]).then(function(x){var I=x[0],rows;
+  rows=[];x[3].forEach(function(n){if(hit(n.tr+' '+n.kg+' '+n.m_tr+' '+n.m_kg)||hitA(n.ar))rows.push(['#/esma',n.n+'. '+(lang==='kg'?n.kg:n.tr),lang==='kg'?n.m_kg:n.m_tr])});var names=rows;
+  rows=[];x[2].forEach(function(n){if(hit(n.tr+' '+n.kg+' '+n.en)||hitA(n.ar))rows.push(['#/hadis','Nevevî '+n.n,(lang==='kg'?n.kg:n.tr).slice(0,160)+'…'])});var had=rows;
+  rows=[];x[1].forEach(function(p){p.items.forEach(function(it){if(hit(it.tr+' '+it.kg)||hitA(it.ar))rows.push(['#/kuran/'+it.s+'/'+it.a1,F(p,'p')+' · '+I[lang][it.s-1]+' '+it.s+':'+it.a1,it[lang].slice(0,160)])})});var duas=rows;
+  rows=[];x[4].forEach(function(t,i){if(hit(t.tr+' '+t.kg))rows.push(['#/temalar/'+i,t.i+' '+t[lang],t.r.length+' '+tx('ay')])});var th=rows;
+  rows=[];x[5].concat(x[6]).forEach(function(b){if(hit(F(b,'t')+' '+(F(b,'a')||'')+' '+(F(b,'body')||'')))rows.push([b.file?'#/kitaplar':'#/yazilar',F(b,'t'),F(b,'a')||b.date||''])});var bk=rows;
+  rows=[];for(var i=0;i<114;i++)if(hit(I[lang][i]+' '+I.tr[i])||String(i+1)===q)rows.push(['#/kuran/'+(i+1),(i+1)+'. '+I[lang][i],I.n[i]+' '+tx('ay')]);var su=rows;
+  sec(tx('s_t'),th);sec(tx('s_n'),names);sec(tx('s_hd'),had);sec(tx('s_d'),duas);sec(tx('s_b'),bk);
+  var ps=[];for(var n=1;n<=114;n++)ps.push(qSura(n));Promise.all(ps).then(function(S){var qr=[];S.forEach(function(s,k){(isA?s.a:s[lang]).forEach(function(v,i){if(isA?arNorm(v).indexOf(qa)>=0:v.toLowerCase().indexOf(low)>=0)qr.push(['#/kuran/'+(k+1)+'/'+(i+1),I[lang][k]+' '+(k+1)+':'+(i+1),s[lang][i]])})});
+   out.innerHTML='';sec(tx('s_q')+' · '+tx('sura'),su);sec(tx('s_q'),qr);sec(tx('s_t'),th);sec(tx('s_n'),names);sec(tx('s_hd'),had);sec(tx('s_d'),duas);sec(tx('s_b'),bk);
+   if(!out.children.length)out.append(h('div',{class:'empty'},tx('s_none')))})})}
+var R={ibadet:ibadet,kutuphane:kutuphane,ara:ara,daha:daha,kaynak:kaynak,tecvid:tecvid,namazrehber:namazrehber,zikirler:zikirler,hadis:hadis,esma:esma,temalar:temalar,ramazan:ramazan,cocuk:cocuk,cetele:cetele,namaz:namaz,men:men,'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir,dualar:duas,ozel:ozel,kuran:function(n,a){n?quranSura(n,a):quranList()}};
+function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];qStop();clrTM();(R[r]||home)(pp[1],pp[2]);var MAP={kuran:'kuran',temalar:'kuran',tecvid:'kuran',dualar:'ibadet',ozel:'ibadet',zikirler:'ibadet',zikirmatik:'ibadet',namaz:'ibadet',namazrehber:'ibadet',ramazan:'ibadet',cetele:'ibadet',ibadet:'ibadet',kitaplar:'kutuphane',dinle:'kutuphane',yazilar:'kutuphane',hadis:'kutuphane',esma:'kutuphane',cocuk:'kutuphane',kaynak:'kutuphane',kutuphane:'kutuphane',men:'men'},nr=MAP[r]||'';document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===nr)});if(r!=='kuran')window.scrollTo(0,0)}
 addEventListener('hashchange',route);
 $('#lg').onclick=function(){lang=lang==='tr'?'kg':'tr';try{localStorage.setItem('lang',lang)}catch(e){}applyLang();route()};
 function rpUp(){var a=$('#rp');a.href=srcLink();a.textContent=tx('rep')}addEventListener('hashchange',rpUp);var _al=applyLang;applyLang=function(){_al();rpUp()};applyLang();route();
