@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="tr"><head><meta charset="utf-8">
+<html lang="ky"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>İslam – Kitaplar, Dinle, Yazılar, Zikirmatik</title>
-<meta name="description" content="İslami kitaplar, ses kayıtları, yazılar ve zikirmatik.">
+<title>Ислам – Китептер, Угуу, Макалалар, Зикирматик</title>
+<meta name="description" content="Ислам китептери, аудио жазуулар, макалалар жана зикирматик.">
 <meta name="theme-color" content="#0f5c4a">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap">
@@ -79,7 +79,7 @@ i.th{color:#9e9e9e}i.tl,i.ts{color:#9e9e9e}i.tn{color:#2e7d32}i.tp{color:#00897b
 .wbw{display:flex;flex-wrap:wrap;direction:rtl;gap:6px;margin:6px 0}.wd{border:1px solid var(--line);border-radius:10px;padding:6px 8px;text-align:center;min-width:64px;direction:ltr;background:var(--card)}.wa{font:400 22px/1.9 Amiri,serif;direction:rtl}.wt{font-size:12px;color:var(--gold);font-weight:600}.wm{font-size:12px;color:var(--mut)}
 .nm{cursor:pointer;position:relative}.nm .mn{display:block;text-align:center;margin-top:6px;color:var(--mut)}.grid.hm .nm .mn{display:none}.grid.hm .nm.sh .mn{display:block}
 </style></head><body>
-<header><div class="hd"><a class="logo" href="#/"><svg viewBox="0 0 100 100"><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#e8c766"/><path d="M70 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#e8c766"/></svg>İslam</a><span class="sp"></span><button class="tm" id="lg" title="Dil / Тил"></button><button class="tm" id="tm" title="Tema">🌙</button></div>
+<header><div class="hd"><a class="logo" href="#/"><svg viewBox="0 0 100 100"><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#e8c766"/><path d="M70 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#e8c766"/></svg>Ислам</a><span class="sp"></span><button class="tm" id="lg" title="Dil / Тил"></button><button class="tm" id="tm" title="Tema">🌙</button></div>
 <nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kuran" data-r="kuran">📖 Kur’an</a><a href="#/ibadet" data-r="ibadet">🤲 İbadet</a><a href="#/kutuphane" data-r="kutuphane">📚 Kütüphane</a><a href="#/men" data-r="men">👤 Ben</a></nav></header>
 <main id="app"></main>
 <footer><a id="rp" target="_blank" rel="noopener" style="color:inherit">⚠️</a> · <span id="ft"></span> · <span id="yr"></span></footer>
@@ -118,7 +118,7 @@ kg:{title:'Ислам – Китептер, Угуу, Макалалар, Зик
  ph:'Макалалар',pl:'Макалалар, дубалар жана жазуулар.',tabp:'Макалалар',tabn:'🗒 Жазууларым',pe:'Азырынча макала жок.',nl:'Жазууларыңыз ушул түзмөктө гана сакталат, эч ким көрбөйт.',np:'Жазуу жазыңыз…',save:'Сактоо',nn:'Азырынча жазуу жок.',del:'Өчүрүү',delq:'Өчүрүлсүнбү?',
  zh:'Зикирматик',zl:'Басыңыз жана санаңыз. Эсептегич ушул түзмөктө сакталат.',undo:'↶ Артка кайтаруу',reset:'↺ Нөлгө келтирүү',goal:'🎯 Максат',vo:'📳 Титирөө күйгүзүлгөн',vc:'📴 Титирөө өчүрүлгөн',goalq:'Максаттагы сан (0 = максатсыз):',today:'Бүгүн (жалпы)',tot:'Бул зикирде жалпы',tap:'басыңыз',
  z:{sub:'Субханаллах',hmd:'Альхамдулиллах',ekb:'Аллаху акбар',ist:'Астагфируллах',lel:'Лаа илааха иллаллах',sal:'Салават',hql:'Лаа хавла вала куввата илла билла',cus:'Эркин эсептегич'}}};
-var lang=(function(){try{var v=localStorage.getItem('lang');if(v&&L[v])return v}catch(e){}return /^(ky|kk)/i.test(navigator.language||'')?'kg':'tr'})();
+var lang='kg';
 function tx(k){return L[lang][k]}
 function F(o,k){return o[k+'_'+lang]||o[k]}
 function applyLang(){document.documentElement.lang=lang==='kg'?'ky':'tr';document.title=tx('title');
@@ -664,7 +664,7 @@ function ara(q){q=decodeURIComponent(q||'').trim();app.innerHTML='';app.append(h
 var R={ibadet:ibadet,kutuphane:kutuphane,ara:ara,daha:daha,kaynak:kaynak,tecvid:tecvid,namazrehber:namazrehber,zikirler:zikirler,hadis:hadis,esma:esma,temalar:temalar,ramazan:ramazan,cocuk:cocuk,cetele:cetele,namaz:namaz,men:men,'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir,dualar:duas,ozel:ozel,kuran:function(n,a){n?quranSura(n,a):quranList()}};
 function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];qStop();clrTM();(R[r]||home)(pp[1],pp[2]);var MAP={kuran:'kuran',temalar:'kuran',tecvid:'kuran',dualar:'ibadet',ozel:'ibadet',zikirler:'ibadet',zikirmatik:'ibadet',namaz:'ibadet',namazrehber:'ibadet',ramazan:'ibadet',cetele:'ibadet',ibadet:'ibadet',kitaplar:'kutuphane',dinle:'kutuphane',yazilar:'kutuphane',hadis:'kutuphane',esma:'kutuphane',cocuk:'kutuphane',kaynak:'kutuphane',kutuphane:'kutuphane',men:'men'},nr=MAP[r]||'';document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===nr)});if(r!=='kuran')window.scrollTo(0,0)}
 addEventListener('hashchange',route);
-$('#lg').onclick=function(){lang=lang==='tr'?'kg':'tr';try{localStorage.setItem('lang',lang)}catch(e){}applyLang();route()};
+$('#lg').style.display='none';$('#lg').onclick=function(){return;lang=lang==='tr'?'kg':'tr';try{localStorage.setItem('lang',lang)}catch(e){}applyLang();route()};
 function rpUp(){var a=$('#rp');a.href=srcLink();a.textContent=tx('rep')}addEventListener('hashchange',rpUp);var _al=applyLang;applyLang=function(){_al();rpUp()};applyLang();route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
 </script></body></html>
