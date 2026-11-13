@@ -182,7 +182,7 @@ function home(){app.innerHTML='';
  var hp=h('div',{id:'hp'});app.append(hp);homePanel(hp);
  app.append(h('h2',null,'Бардык бөлүмдөр'));
  var g=h('div',{class:'more'});
- [['🤲','Ибадат','#/ibadet'],['📚','Китепкана','#/kutuphane'],['📚',tx('t1'),'#/kitaplar'],['⭐',tx('t6'),'#/ozel'],['📿',tx('t4'),'#/zikirmatik'],['📜',tx('t10'),'#/hadis'],['🗂️',tx('t12'),'#/temalar'],['🌙',tx('t13'),'#/ramazan'],['🧒',tx('t14'),'#/cocuk'],['🎓',tx('t15'),'#/tecvid'],['🌅',tx('t17'),'#/zikirler'],['ℹ️',tx('t18'),'#/kaynak']].forEach(function(x){g.append(h('a',{href:x[2]},[h('span',null,x[0]),x[1]]))});
+ [['📅','Күндөлүк','#/kundoluk'],['🤲','Ибадат','#/ibadet'],['📚','Китепкана','#/kutuphane'],['📚',tx('t1'),'#/kitaplar'],['⭐',tx('t6'),'#/ozel'],['📿',tx('t4'),'#/zikirmatik'],['📜',tx('t10'),'#/hadis'],['🗂️',tx('t12'),'#/temalar'],['🌙',tx('t13'),'#/ramazan'],['🧒',tx('t14'),'#/cocuk'],['🎓',tx('t15'),'#/tecvid'],['🌅',tx('t17'),'#/zikirler'],['ℹ️',tx('t18'),'#/kaynak']].forEach(function(x){g.append(h('a',{href:x[2]},[h('span',null,x[0]),x[1]]))});
  app.append(g);
  load('posts').then(function(P){if(!P.length||(location.hash.replace(/^#\/?/,'')&&1))return;app.append(h('h2',null,tx('recent')));P.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,3).forEach(function(p){app.append(postCard(p))})})}
 /* ---------- books ---------- */
@@ -792,7 +792,7 @@ window.profil=function(){app.innerHTML='';var s=stats(),last=ls('qlast');
  app.append(g,h('h2',null,'Улантуу'));
  var rows=[];
  if(last)rows.push(['Куранды окууну улантуу',null,'#/kuran/'+last+(ls('qla')?'/'+ls('qla'):''),'quran']);
- rows.push(['Викторина','Билимди текшер','#/viktorina'],['Ибадат','Дубалар, зикир, Рамазан','#/ibadet'],['Китепкана','Китептер, хадис, 99 ысым','#/kutuphane'],['Ката жөнөт / сунуш','GitHub аркылуу',srcLink()]);
+ rows.push(['Күндөлүк','Күндөлүк ибадат эсеби','#/kundoluk'],['Зикирматик','Үн менен санагыч','#/zikirmatik'],['Викторина','Билимди текшер','#/viktorina'],['Ибадат','Дубалар, зикир, Рамазан','#/ibadet'],['Китепкана','Китептер, хадис, 99 ысым','#/kutuphane'],['Ката жөнөт / сунуш','GitHub аркылуу',srcLink()]);
  rows.forEach(function(r){var lnk=h('a',{class:'lrow',href:r[2]||r[1],target:/^http/.test(r[2])?'_blank':'_self'},[h('div',null,[h('b',null,r[0]),r[1]&&r[2]?h('span',null,r[1]):h('span',null,'')]),h('i',null,'›')]);app.append(lnk)});
  app.append(h('h2',null,'Тема'),h('button',{class:'btn o',onclick:function(){$('#tm').click()}},'🌙 Караңгы / ачык режим'))};
 R.viktorina=viktorina;R.profil=profil;
@@ -863,6 +863,42 @@ function counter(id){var z=lst().filter(function(x){return x.id===id})[0];if(!z)
 R.zikirmatik=function(id){id?counter(id):listPage()};
 var _r2=route;route=function(){_r2();var r=location.hash.replace(/^#\/?/,'').split('/')[0];if(r==='zikirmatik')document.querySelectorAll('#nav a').forEach(function(a){a.classList.remove('on')})};
 removeEventListener('hashchange',_r2);addEventListener('hashchange',route);route();
+})();
+</script>
+<script>
+/* ====== Күндөлүк (ибадат күндөлүгү) ====== */
+(function(){
+var IT=[['fj','Багымдат намазы','🌅'],['zh','Бешим намазы','☀️'],['as','Аср намазы','🌤️'],['mg','Шам намазы','🌇'],['is','Ыша намазы','🌙'],['qr','Куран окуу','📖'],['zk','Зикир','📿'],['sd','Садака','🤲'],['nf','Нафил / тахажжуд','✨']];
+var DN=['Жк','Дш','Шш','Шр','Бш','Жм','Иш'];
+function dk(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function P(s){var a=s.split('-');return new Date(+a[0],+a[1]-1,+a[2])}
+function D(){return ls('kd')||{}}
+function cnt(D,k){return (D[k]||[]).length}
+function ring(p,sz){var r=sz/2-7,c=2*Math.PI*r;return '<svg width="'+sz+'" height="'+sz+'" style="flex:none"><circle cx="'+sz/2+'" cy="'+sz/2+'" r="'+r+'" fill="none" stroke="var(--sage)" stroke-width="7"/><circle cx="'+sz/2+'" cy="'+sz/2+'" r="'+r+'" fill="none" stroke="var(--g)" stroke-width="7" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+c*(1-p)+'" transform="rotate(-90 '+sz/2+' '+sz/2+')"/><text x="'+sz/2+'" y="'+(sz/2+7)+'" text-anchor="middle" font-size="20" font-weight="800" fill="var(--g)">'+Math.round(p*100)+'%</text></svg>'}
+window.kundoluk=function(sel){sel=sel||dk();app.innerHTML='';var d=D(),now=dk(),zkDone=false;
+ try{var z=ls('zk2');zkDone=!!(z&&z.days&&z.days[sel]&&Object.keys(z.days[sel]).some(function(k){return z.days[sel][k]>0}))}catch(e){}
+ var done=(d[sel]||[]).slice();if(zkDone&&done.indexOf('zk')<0)done.push('zk');
+ var sd=P(sel),prev=dk(new Date(sd.getTime()-864e5)),next=dk(new Date(sd.getTime()+864e5));
+ var MN=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+ app.append(h('div',{style:'display:flex;gap:14px;align-items:center;background:var(--sage);margin:-16px -16px 14px;padding:22px 16px 16px;border-radius:0 0 22px 22px'},[h('a',{href:'#/profil',style:'width:46px;height:46px;border-radius:14px;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--g);flex:none;font-size:22px'},'←'),h('div',null,[h('div',{style:'font:800 30px Inter;color:var(--g)'},'Күндөлүк'),h('div',{style:'color:var(--mut)'},'Күндөлүк ибадат эсеби')])]));
+ var nav=h('div',{style:'display:flex;align-items:center;justify-content:space-between;margin-bottom:12px'},[h('button',{class:'btn o',style:'padding:8px 14px',onclick:function(){kundoluk(prev)}},'‹'),h('b',{style:'font-size:18px;color:var(--g)'},(sel===now?'Бүгүн · ':'')+sd.getDate()+' '+MN[sd.getMonth()]+' '+sd.getFullYear()),h('button',{class:'btn o',style:'padding:8px 14px;'+(sel>=now?'opacity:.35':''),onclick:function(){if(sel<now)kundoluk(next)}},'›')]);
+ app.append(nav);
+ var p=done.length/IT.length;
+ var streak=0,x=new Date();if(!(d[dk(x)]||[]).length)x=new Date(x.getTime()-864e5);while((d[dk(x)]||[]).length>=5){streak++;x=new Date(x.getTime()-864e5)}
+ app.append(h('div',{class:'card',style:'display:flex;align-items:center;gap:16px;padding:16px;border-radius:24px'},[h('div',{html:ring(p,86)}),h('div',null,[h('div',{style:'font:800 19px Inter;color:var(--g)'},done.length+' / '+IT.length+' аткарылды'),h('div',{style:'color:var(--mut);margin-top:4px'},'🔥 '+streak+' күн катары менен (5+ ибадат)')])]));
+ var card=h('div',{class:'card',style:'padding:4px 16px;border-radius:24px;margin-top:14px'});
+ IT.forEach(function(it,i){var on=done.indexOf(it[0])>-1,auto=it[0]==='zk'&&zkDone;
+  card.append(h('button',{style:'display:flex;width:100%;align-items:center;gap:12px;padding:16px 0;border:0;background:none;text-align:left;cursor:pointer;color:var(--ink);font:600 17px Inter;'+(i?'border-top:1px solid var(--line)':''),onclick:function(){if(auto)return location.hash='#/zikirmatik';var dd=D(),a=dd[sel]||[],j=a.indexOf(it[0]);if(j>-1)a.splice(j,1);else a.push(it[0]);dd[sel]=a;ls('kd',dd);kundoluk(sel)}},[h('span',{style:'font-size:22px'},it[2]),h('span',{style:'flex:1;'+(on?'color:var(--g)':'')},it[1]),h('span',{style:'width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;'+(on?'background:var(--g);color:#fff':'border:2px solid var(--line)')},on?'✓':'')]))});
+ app.append(card);
+ var ch=h('div',{class:'card',style:'padding:18px;border-radius:24px;margin-top:14px'}),bars=h('div',{style:'display:flex;align-items:flex-end;justify-content:space-between;height:100px;gap:6px'}),tot=0;
+ for(var i=6;i>=0;i--){(function(i){var dt=new Date(Date.now()-i*864e5),k=dk(dt),n=cnt(d,k);tot+=n;bars.append(h('div',{style:'flex:1;text-align:center;cursor:pointer',onclick:function(){kundoluk(k)}},[h('div',{style:'height:'+Math.max(8,n/IT.length*80)+'px;width:26px;margin:0 auto 6px;border-radius:10px;background:'+(k===sel?'var(--g)':'var(--sage)')}),h('div',{style:'font-size:14px;color:var(--mut);'+(k===sel?'font-weight:800;color:var(--ink)':'')},DN[dt.getDay()])]))})(i)}
+ ch.append(h('div',{style:'display:flex;justify-content:space-between;font:800 19px Inter;color:var(--g);margin-bottom:10px'},[h('span',null,'Сиздин аптаңыз'),h('span',null,String(tot))]),bars);app.append(ch);
+ var hm=h('div',{class:'card',style:'padding:18px;border-radius:24px;margin-top:14px'}),gr=h('div',{style:'display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:10px'});
+ for(var i=27;i>=0;i--){var dt=new Date(Date.now()-i*864e5),k=dk(dt),n=cnt(d,k),a=n/IT.length;gr.append(h('div',{title:k,style:'aspect-ratio:1;border-radius:8px;background:'+(n?'rgba(42,74,60,'+(.25+a*.75)+')':'var(--sage)')+';cursor:pointer',onclick:function(k){return function(){kundoluk(k)}}(k)}))}
+ hm.append(h('div',{style:'font:800 19px Inter;color:var(--g)'},'Акыркы 28 күн'),gr);app.append(hm)};
+R.kundoluk=kundoluk;
+var _r3=route;route=function(){_r3();var r=location.hash.replace(/^#\/?/,'').split('/')[0];if(r==='kundoluk')document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r==='profil')})};
+removeEventListener('hashchange',_r3);addEventListener('hashchange',route);route();
 })();
 </script>
 </body></html>
