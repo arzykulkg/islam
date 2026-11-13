@@ -182,9 +182,9 @@ function home(){app.innerHTML='';
  var hp=h('div',{id:'hp'});app.append(hp);homePanel(hp);
  app.append(h('h2',null,'Бардык бөлүмдөр'));
  var g=h('div',{class:'more'});
- [['📚',tx('t1'),'#/kitaplar'],['⭐',tx('t6'),'#/ozel'],['📿',tx('t4'),'#/zikirmatik'],['📜',tx('t10'),'#/hadis'],['🗂️',tx('t12'),'#/temalar'],['🌙',tx('t13'),'#/ramazan'],['🧒',tx('t14'),'#/cocuk'],['🎓',tx('t15'),'#/tecvid'],['🌅',tx('t17'),'#/zikirler'],['ℹ️',tx('t18'),'#/kaynak']].forEach(function(x){g.append(h('a',{href:x[2]},[h('span',null,x[0]),x[1]]))});
+ [['🤲','Ибадат','#/ibadet'],['📚','Китепкана','#/kutuphane'],['📚',tx('t1'),'#/kitaplar'],['⭐',tx('t6'),'#/ozel'],['📿',tx('t4'),'#/zikirmatik'],['📜',tx('t10'),'#/hadis'],['🗂️',tx('t12'),'#/temalar'],['🌙',tx('t13'),'#/ramazan'],['🧒',tx('t14'),'#/cocuk'],['🎓',tx('t15'),'#/tecvid'],['🌅',tx('t17'),'#/zikirler'],['ℹ️',tx('t18'),'#/kaynak']].forEach(function(x){g.append(h('a',{href:x[2]},[h('span',null,x[0]),x[1]]))});
  app.append(g);
- load('posts').then(function(P){if(!P.length)return;app.append(h('h2',null,tx('recent')));P.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,3).forEach(function(p){app.append(postCard(p))})})}
+ load('posts').then(function(P){if(!P.length||(location.hash.replace(/^#\/?/,'')&&1))return;app.append(h('h2',null,tx('recent')));P.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,3).forEach(function(p){app.append(postCard(p))})})}
 /* ---------- books ---------- */
 function openPdf(b){var ov=h('div',{class:'ov'},[h('div',{class:'bar'},[h('button',{class:'btn o',style:'color:#fff;border-color:#fff',onclick:function(){ov.remove()}},tx('back')),h('b',{style:'flex:1;font-size:15px'},F(b,'t')),h('a',{class:'btn g',href:b.file,download:''},tx('dl'))]),h('iframe',{src:b.file})]);document.body.append(ov)}
 function books(){app.innerHTML='';app.append(h('h1',null,tx('bkh')),h('p',{class:'lead'},tx('bkl')));
@@ -727,4 +727,81 @@ addEventListener('hashchange',route);
 $('#lg').style.display='none';$('#lg').onclick=function(){return;lang=lang==='tr'?'kg':'tr';try{localStorage.setItem('lang',lang)}catch(e){}applyLang();route()};
 function rpUp(){var a=$('#rp');a.href=srcLink();a.textContent=tx('rep')}addEventListener('hashchange',rpUp);var _al=applyLang;applyLang=function(){_al();rpUp()};applyLang();route();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
-</script></body></html>
+</script><script>
+/* ====== Викторина + Профиль ====== */
+(function(){
+var QB=[
+['Исламдын шарты канчага бөлүнөт?',['5','4','6','7'],0,'Шахадат, намаз, орозо, закят жана хаж.'],
+['Күнүнө канча убак парз намаз окулат?',['5','3','4','6'],0,'Багымдат, бешим, аср, шам жана ыша.'],
+['Куранда канча сүрө бар?',['114','99','120','100'],0,'Куран 114 сүрөдөн турат.'],
+['Куран кайсы айда түшө баштаган?',['Рамазан','Мухаррам','Ражаб','Шаввал'],0,'Кадыр түнү, Рамазан айында.'],
+['Орозо кайсы айда кармалат?',['Рамазан','Шаабан','Зулхижжа','Сафар'],0,'Рамазан — Хижра жылнаамасынын тогузунчу айы.'],
+['Каабага карай багыт эмне деп аталат?',['Кыбла','Михраб','Мимбар','Азан'],0,'Намазда Каабага — кыблага карайбыз.'],
+['Кааба кайсы шаарда жайгашкан?',['Мекке','Медина','Таиф','Иерусалим'],0,'Масжид аль-Харамдын ичинде, Меккеде.'],
+['Пайгамбарыбыз Мекседен кайсы шаарга хижра кылган?',['Медина','Таиф','Хайбар','Куддус'],0,'Хижра — Мединеге көчүү.'],
+['Адамзаттын биринчи пайгамбары ким?',['Адам алейхиссалам','Нух алейхиссалам','Ибрахим алейхиссалам','Муса алейхиссалам'],0,'Адам алейхиссалам — биринчи инсан жана биринчи пайгамбар.'],
+['Акыркы пайгамбар ким?',['Мухаммед алейхиссалам','Иса алейхиссалам','Муса алейхиссалам','Нух алейхиссалам'],0,'Ага чейин пайгамбарлар келип, Мухаммед алейхиссалам акыркысы.'],
+['Хаж кайсы айда аткарылат?',['Зулхижжа','Рамазан','Мухаррам','Ражаб'],0,'Хаж — Зулхижжа айынын белгилүү күндөрүндө.'],
+['Ыйман шарты канчага бөлүнөт?',['6','5','4','7'],0,'Аллахка, периштелерге, китептерге, пайгамбарларга, ахыретке жана тагдырга ыйман келтирүү.'],
+['Куранда эң узун сүрө кайсы?',['Бакара','Али Имран','Ниса','Маида'],0,'Бакара сүрөсү — 286 аят.'],
+['Куранда эң кыска сүрө кайсы?',['Каусар','Ихлас','Фалак','Наас'],0,'Каусар сүрөсү 3 аяттан турат.'],
+['Жума намазы кайсы күнү окулат?',['Жума','Бейшемби','Ишемби','Жекшемби'],0,'Жума — жумалык чоң жыйын күнү.'],
+['Таң намазы кандай аталат?',['Багымдат','Бешим','Аср','Ыша'],0,'Багымдат — таң намазы.'],
+['Куранды биринчи сүрө кайсы?',['Фатиха','Бакара','Ихлас','Ясин'],0,'Фатиха — «Ачуучу» сүрө.'],
+['«Бисмиллах» деген сөздүн мааниси?',['Аллахтын аты менен','Аллахка ыраазылык','Аллах улуу','Аллах кечиримдүү'],0,'«Аллахтын аты менен» деген мааниде.'],
+['Шахадат (калима) эмнени билдирет?',['Аллахтан башка кудай жок, Мухаммед — Анын элчиси деп күбөлүк берүү','Беш убак намаз окуу','Орозо кармоо','Хажга баруу'],0,'Ислам динине кирүүнүн негизги шарты.'],
+['Закят кайсыл ибадат менен байланыштуу?',['Байлыктын бир бөлүгүн муктаж адамдарга берүү','Орозо кармоо','Куран окуу','Хажга баруу'],0,'Закят — малдын белгилүү бөлүгүн жакырларга жана муктаждарга берүү.'],
+['Ихлас сүрөсү канча аяттан турат?',['4','3','5','7'],0,'Ихлас — 4 аят.'],
+['Фатиха сүрөсү канча аяттан турат?',['7','5','6','8'],0,'Фатиха — 7 аят.']
+];
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function pick(a,n,ex){var r=[];shuf(a).forEach(function(x){if(r.length<n&&x!==ex&&r.indexOf(x)<0)r.push(x)});return r}
+function mk(q,opts,ok,note){var o=shuf(opts.map(function(t,i){return{t:t,c:i===ok}}));return{q:q,o:o,note:note}}
+function build(){return Promise.all([load('names99'),qIndex()]).then(function(x){var N=x[0],I=x[1],pool=[];
+ QB.forEach(function(b){pool.push(mk(b[0],b[1],b[2],b[3]))});
+ for(var i=0;i<6;i++){var n=N[Math.floor(Math.random()*N.length)],mm=n.m_kg;if(!mm)continue;var wr=pick(N.map(function(z){return z.m_kg}).filter(Boolean),3,mm);pool.push(mk('«'+n.kg+'» ысымынын мааниси кайсы?',[mm].concat(wr),0,n.kg+' — '+mm+'.'))}
+ for(var i=0;i<4;i++){var k=Math.floor(Math.random()*114),nm=I.kg[k],ans=String(k+1),wr=pick(['1','2','3','5','7','12','18','36','55','67','78','90','100','110'].filter(function(v){return Math.abs(+v-(k+1))>0}),3,ans);pool.push(mk('«'+nm+'» сүрөсү Куранда канчанчы?',[ans].concat(wr),0,nm+' — '+ans+'-сүрө.'))}
+ for(var i=0;i<3;i++){var k=Math.floor(Math.random()*114),nm=I.kg[k],c=I.n[k],cand=[c+1,c+3,c+8,Math.max(3,c-2),c+12].filter(function(v){return v!==c&&v>2}),wr=shuf(cand).slice(0,3).map(String);pool.push(mk('«'+nm+'» сүрөсү канча аяттан турат?',[String(c)].concat(wr),0,nm+' сүрөсү '+c+' аяттан турат.'))}
+ return shuf(pool).slice(0,10)})}
+function stats(){return ls('qzs')||{played:0,correct:0,total:0,best:0,streak:0,last:''}}
+function today(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function save(score){var s=stats(),t=today();s.played++;s.correct+=score;s.total+=10;s.best=Math.max(s.best,score);
+ var y=new Date(Date.now()-864e5);var ys=y.getFullYear()+'-'+(y.getMonth()+1)+'-'+y.getDate();if(s.last!==t){s.streak=(s.last===ys)?s.streak+1:1;s.last=t}ls('qzs',s)}
+function ico(d){return '<svg viewBox="0 0 24 24" style="width:34px;height:34px;stroke:var(--g);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round">'+d+'</svg>'}
+window.viktorina=function(){app.innerHTML='';var box=h('div');app.append(h('h1',null,'Викторина'),h('p',{class:'lead'},'Билимиңди текшер: 10 суроо, ар бири 4 жооп.'),box);
+ function start(){box.innerHTML='<div class="empty">…</div>';build().then(run)}
+ function run(Q){var i=0,sc=0;
+  function show(){box.innerHTML='';
+   if(i>=Q.length){save(sc);var msg=sc>=9?'Баракалла! Эң мыкты 🌟':sc>=7?'Жакшы! Дагы бир аз 👍':sc>=5?'Жаман эмес, кайталап көрүңүз':'Окуп, кайра аракет кылыңыз 📖';
+    box.append(h('div',{class:'card',style:'text-align:center;padding:30px 20px'},[h('div',{style:'font:800 64px Inter;color:var(--g)'},sc+'/10'),h('p',{style:'font-size:19px;margin:6px 0 18px'},msg),h('button',{class:'btn',onclick:start},'Кайра ойноо'),h('a',{class:'btn o',href:'#/profil',style:'margin-left:8px'},'Профиль')]));return}
+   var q=Q[i],done=false;
+   box.append(h('div',{class:'bar'},[h('i',{style:'width:'+(i/Q.length*100)+'%'})]),h('div',{style:'color:var(--mut);font-weight:600;margin:6px 0 10px'},'Суроо '+(i+1)+' / '+Q.length));
+   var c=h('div',{class:'card',style:'padding:22px'});c.append(h('div',{style:'font:800 21px/1.35 Inter;color:var(--g);margin-bottom:16px'},q.q));
+   var fb=h('div',{style:'margin-top:14px;display:none'}),nx=h('button',{class:'btn',style:'display:none;margin-top:12px',onclick:function(){i++;show()}},i===Q.length-1?'Жыйынтык':'Кийинки →');
+   var btns=[];q.o.forEach(function(o){var b=h('button',{style:'display:block;width:100%;text-align:left;border:2px solid var(--line);background:var(--sage);color:var(--ink);border-radius:16px;padding:14px 16px;font:600 16px Inter;margin-bottom:10px;cursor:pointer',onclick:function(){if(done)return;done=true;
+    if(o.c){sc++;b.style.cssText+=';background:#d8efdc;border-color:#2e7d32;color:#1b5e20'}else{b.style.cssText+=';background:#fbe0dd;border-color:#c62828;color:#8e1b12';btns.forEach(function(x){if(x.o.c)x.b.style.cssText+=';background:#d8efdc;border-color:#2e7d32;color:#1b5e20'})}
+    fb.style.display='block';fb.textContent=(o.c?'✅ Туура! ':'❌ Туура эмес. ')+q.note;nx.style.display='inline-block'}},o.t);btns.push({b:b,o:o});c.append(b)});
+   c.append(fb,nx);box.append(c)}
+  show()}
+ start()};
+window.profil=function(){app.innerHTML='';var s=stats(),last=ls('qlast');
+ var pct=s.total?Math.round(s.correct/s.total*100):0;
+ app.append(h('div',{style:'display:flex;align-items:center;gap:14px;margin:8px 0 18px'},[h('div',{style:'width:62px;height:62px;border-radius:50%;background:var(--g);color:#f1d98a;display:flex;align-items:center;justify-content:center;font:800 28px Inter'},'☾'),h('div',null,[h('div',{style:'font:800 24px Inter;color:var(--g)'},'Менин жолум'),h('div',{style:'color:var(--mut)'},'Окуу жана ибадат жыйынтыктары')])]));
+ var g=h('div',{class:'tiles'});
+ [['🔥',s.streak,'күн катары менен'],['🎯',pct+'%','туура жооптор'],['🏆',s.best+'/10','эң мыкты жыйынтык'],['🎮',s.played,'ойнолгон викторина']].forEach(function(x){g.append(h('div',{class:'tl',style:'text-align:center'},[h('div',{style:'font-size:30px'},x[0]),h('b',{style:'font-size:28px'},String(x[1])),h('span',null,x[2])]))});
+ app.append(g,h('h2',null,'Улантуу'));
+ var rows=[];
+ if(last)rows.push(['Куранды окууну улантуу',null,'#/kuran/'+last+(ls('qla')?'/'+ls('qla'):''),'quran']);
+ rows.push(['Викторина','Билимди текшер','#/viktorina'],['Ибадат','Дубалар, зикир, Рамазан','#/ibadet'],['Китепкана','Китептер, хадис, 99 ысым','#/kutuphane'],['Ката жөнөт / сунуш','GitHub аркылуу',srcLink()]);
+ rows.forEach(function(r){var lnk=h('a',{class:'lrow',href:r[2]||r[1],target:/^http/.test(r[2])?'_blank':'_self'},[h('div',null,[h('b',null,r[0]),r[1]&&r[2]?h('span',null,r[1]):h('span',null,'')]),h('i',null,'›')]);app.append(lnk)});
+ app.append(h('h2',null,'Тема'),h('button',{class:'btn o',onclick:function(){$('#tm').click()}},'🌙 Караңгы / ачык режим'))};
+R.viktorina=viktorina;R.profil=profil;
+/* nav: 5 tabs */
+var nv=document.getElementById('nav');
+function I(d){return '<svg viewBox="0 0 24 24">'+d+'</svg>'}
+nv.innerHTML='<a href="#/" data-r="">'+I('<path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>')+'<em>Башкы</em></a><a href="#/namaz" data-r="namaz">'+I('<path d="M4 21V12a8 8 0 0 1 16 0v9M2 21h20M10 21v-5a2 2 0 0 1 4 0v5M12 2v2"/>')+'<em>Намаз</em></a><a href="#/kuran" data-r="kuran">'+I('<path d="M12 6c-2-2-5-2.5-8-2v14c3-.5 6 0 8 2 2-2 5-2.5 8-2V4c-3-.5-6 0-8 2zM12 6v14"/>')+'<em>Куран</em></a><a href="#/viktorina" data-r="viktorina">'+I('<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17v.01"/>')+'<em>Викторина</em></a><a href="#/profil" data-r="profil">'+I('<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>')+'<em>Профиль</em></a>';
+var _r=route;route=function(){_r();var r=(location.hash.replace(/^#\/?/,'')||'').split('/')[0],m={viktorina:'viktorina',profil:'profil'}[r];if(m)document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===m)});if(['ibadet','kutuphane','dualar','ozel','zikirler','zikirmatik','ramazan','cetele','kitaplar','dinle','yazilar','hadis','esma','cocuk','kaynak'].indexOf(r)>-1)document.querySelectorAll('#nav a').forEach(function(a){a.classList.remove('on')})};
+removeEventListener('hashchange',_r);addEventListener('hashchange',route);route();
+})();
+</script>
+</body></html>
