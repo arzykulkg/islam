@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ислам – Китептер, Угуу, Макалалар, Зикирматик</title>
 <meta name="description" content="Ислам китептери, аудио жазуулар, макалалар жана зикирматик.">
-<meta name="theme-color" content="#0f5c4a">
+<meta name="theme-color" content="#fbfaf5">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap">
 <style>
@@ -79,9 +79,44 @@ i.th{color:#9e9e9e}i.tl,i.ts{color:#9e9e9e}i.tn{color:#2e7d32}i.tp{color:#00897b
 .wbw{display:flex;flex-wrap:wrap;direction:rtl;gap:6px;margin:6px 0}.wd{border:1px solid var(--line);border-radius:10px;padding:6px 8px;text-align:center;min-width:64px;direction:ltr;background:var(--card)}.wa{font:400 22px/1.9 Amiri,serif;direction:rtl}.wt{font-size:12px;color:var(--gold);font-weight:600}.wm{font-size:12px;color:var(--mut)}
 .nm{cursor:pointer;position:relative}.nm .mn{display:block;text-align:center;margin-top:6px;color:var(--mut)}.grid.hm .nm .mn{display:none}.grid.hm .nm.sh .mn{display:block}
 a[href="#/dinle"],a[href="#/yazilar"],a[href="#/cetele"],a[href="#/men"]{display:none!important}
-</style></head><body>
+</style>
+<style id="jarat">
+.ar{text-align:right!important;text-align-last:right!important}
+nav a em{font-style:normal}
+:root{--bg:#fbfaf5;--card:#ffffff;--ink:#1f3a2f;--mut:#6c7a72;--g:#2a4a3c;--g2:#3b6652;--gold:#b8944a;--line:#e9e8dc;--sage:#eceee3;--sh:0 2px 14px rgba(31,58,47,.07)}
+:root[data-theme=dark]{--bg:#0f1a16;--card:#17261f;--ink:#e8efe9;--mut:#9bb0a6;--g:#6fcaa6;--g2:#8fdcbd;--gold:#e0bf6a;--line:#25392f;--sage:#1d2f27;--sh:0 2px 14px rgba(0,0,0,.35)}
+body{background:var(--bg)}
+header{position:static;background:transparent;color:var(--ink);padding:env(safe-area-inset-top) 18px 0}
+.hd{height:64px}.logo{color:var(--g);font:800 25px Inter,sans-serif}.logo svg{width:38px;height:38px;background:var(--g);border-radius:50%;padding:7px}.logo svg path{fill:#f1d98a}
+.tm{background:transparent;border:0;color:var(--ink);font-size:20px}
+h1{font:800 27px/1.2 Inter,sans-serif;color:var(--g)}h2{font:800 21px Inter,sans-serif;color:var(--g);margin:26px 0 12px}
+main{padding:6px 18px 130px}
+.card{border:0;border-radius:22px;box-shadow:var(--sh)}
+.btn{border-radius:16px;padding:12px 20px}.btn.o{border-radius:16px}.chip{border:0;background:var(--sage);border-radius:999px}.chip.on{background:var(--g);color:#fff}
+input[type=search],input[type=text],textarea,select{border:0;background:var(--sage);border-radius:18px;padding:14px 18px}
+.sl{border:0;border-radius:18px;box-shadow:var(--sh)}.sl .no{border-radius:14px;background:var(--sage)}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:40;max-width:none;margin:0;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;gap:0;overflow:visible}
+nav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--mut);font-size:12px;font-weight:500;padding:4px 10px;border-radius:0;min-width:62px;background:none!important}
+nav a svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;padding:5px 14px;box-sizing:content-box;border-radius:999px}
+nav a.on{color:var(--g);font-weight:700}nav a.on svg{background:var(--sage)}
+.player{bottom:calc(66px + env(safe-area-inset-bottom))}.toast{bottom:130px}
+footer{padding-bottom:140px}
+/* home */
+.hello{color:var(--gold);font-weight:600;margin:6px 0 0}.big{font:800 29px/1.2 Inter,sans-serif;color:var(--g);margin:4px 0 16px}
+.hero{display:flex;overflow:hidden;background:var(--sage);border-radius:26px;position:relative;min-height:170px;margin:14px 0}
+.hero .tx{padding:20px 0 18px 20px;position:relative;z-index:2;flex:1.1}.hero small{display:block;font-weight:700;color:var(--g)}.hero .nm2{font:800 27px Inter;color:var(--g);line-height:1.1;margin-top:2px}.hero .tt{font:800 40px/1.1 Inter;letter-spacing:-.5px;color:var(--g)}
+.hero .btn{padding:9px 16px;font-size:14px;margin-top:8px}.hero svg{position:absolute;right:0;bottom:0;height:100%;width:62%;z-index:1}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tl{background:var(--sage);border-radius:24px;padding:12px 14px 16px;text-decoration:none;color:var(--ink);position:relative;display:block}
+.tl svg{display:block;width:100%;height:96px;margin-bottom:6px}.tl b{display:block;font:800 18px Inter;color:var(--g)}.tl span{display:block;font-size:13.5px;color:var(--mut)}.tl i{position:absolute;right:14px;bottom:18px;font-style:normal;font-size:22px;color:var(--g)}
+.lrow{display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--card);border-radius:22px;box-shadow:var(--sh);margin-bottom:12px;text-decoration:none;color:inherit}.lrow svg{width:36px;height:36px;stroke:var(--g);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}.lrow b{display:block;font:800 19px Inter;color:var(--g)}.lrow span{color:var(--mut);font-size:14.5px}.lrow i{margin-left:auto;font-style:normal;font-size:24px;color:var(--g)}
+.dua{padding:20px}.dua .ref{color:var(--g);font:800 18px Inter}
+#hp>.card:first-child{display:none!important}
+.more{display:grid;grid-template-columns:1fr 1fr;gap:10px}.more a{background:var(--card);box-shadow:var(--sh);border-radius:18px;padding:14px;text-decoration:none;color:var(--ink);display:flex;gap:10px;align-items:center;font-weight:700;font-size:14.5px}.more a span{font-size:24px}
+@media(min-width:760px){.tiles{grid-template-columns:repeat(4,1fr)}.more{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head><body>
 <header><div class="hd"><a class="logo" href="#/"><svg viewBox="0 0 100 100"><path d="M62 24a28 28 0 1 0 0 52 22 22 0 1 1 0-52z" fill="#e8c766"/><path d="M70 30l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#e8c766"/></svg>Ислам</a><span class="sp"></span><button class="tm" id="lg" title="Dil / Тил"></button><button class="tm" id="tm" title="Tema">🌙</button></div>
-<nav id="nav"><a href="#/" data-r="">Ana sayfa</a><a href="#/kuran" data-r="kuran">📖 Kur’an</a><a href="#/ibadet" data-r="ibadet">🤲 İbadet</a><a href="#/kutuphane" data-r="kutuphane">📚 Kütüphane</a><a href="#/men" data-r="men">👤 Ben</a></nav></header>
+<nav id="nav"><a href="#/" data-r=""><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg><em>Башкы</em></a><a href="#/namaz" data-r="namaz"><svg viewBox="0 0 24 24"><path d="M4 21V12a8 8 0 0 1 16 0v9M2 21h20M10 21v-5a2 2 0 0 1 4 0v5M12 2v2"/></svg><em>Намаз</em></a><a href="#/kuran" data-r="kuran"><svg viewBox="0 0 24 24"><path d="M12 6c-2-2-5-2.5-8-2v14c3-.5 6 0 8 2 2-2 5-2.5 8-2V4c-3-.5-6 0-8 2zM12 6v14"/></svg><em>Куран</em></a><a href="#/ibadet" data-r="ibadet"><svg viewBox="0 0 24 24"><path d="M7 11c0-3 1-5 3-6l1 2M17 11c0-3-1-5-3-6l-1 2M5 14c2 0 4 1 5 3l2 4 2-4c1-2 3-3 5-3M12 21v-8"/></svg><em>Ибадат</em></a><a href="#/kutuphane" data-r="kutuphane"><svg viewBox="0 0 24 24"><path d="M5 3h4v18H5zM9 5h4v16H9zM14 6l4-1 3 15-4 1z"/></svg><em>Китепкана</em></a></nav></header>
 <main id="app"></main>
 <footer><a id="rp" target="_blank" rel="noopener" style="color:inherit">⚠️</a> · <span id="ft"></span> · <span id="yr"></span></footer>
 <div class="player" id="pl" hidden><div class="in"><div class="row" style="justify-content:space-between;margin-bottom:4px"><b id="pt" style="font-size:14px"></b><span class="row"><select id="ps" style="width:auto;padding:4px 8px"><option value=".75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><button class="chip" id="pn">⏭</button><button class="chip" id="px">✕</button></span></div><audio id="au" controls preload="none"></audio></div></div>
@@ -123,7 +158,7 @@ var lang='kg';
 function tx(k){return L[lang][k]}
 function F(o,k){return o[k+'_'+lang]||o[k]}
 function applyLang(){document.documentElement.lang=lang==='kg'?'ky':'tr';document.title=tx('title');
- document.querySelectorAll('#nav a').forEach(function(a,i){a.textContent=tx('nav')[i]});$('#lg').textContent=tx('other');$('#ft').textContent=tx('foot')}
+ $('#lg').textContent=tx('other');$('#ft').textContent=tx('foot')}
 /* theme */
 var th=ls('th')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
 function setTh(t){th=t;document.documentElement.dataset.theme=t;$('#tm').textContent=t==='dark'?'☀️':'🌙';ls('th',t)}setTh(th);$('#tm').onclick=function(){setTh(th==='dark'?'light':'dark')};
@@ -131,10 +166,23 @@ var app=$('#app'),DATA={};
 function load(n){if(DATA[n])return Promise.resolve(DATA[n]);return fetch('data/'+n+'.json?v='+Date.now()).then(function(r){return r.json()}).catch(function(){return[]}).then(function(d){return DATA[n]=d})}
 /* ---------- home ---------- */
 function home(){app.innerHTML='';
- var hp=h('div');app.append(h('h1',null,tx('bism')),h('p',{class:'lead'},tx('homelead')),searchBox(),hp);homePanel(hp);
- var g=h('div',{class:'grid'});
- [['📚',tx('t1'),tx('d1'),'#/kitaplar'],['🎧',tx('t2'),tx('d2'),'#/dinle'],['✍️',tx('t3'),tx('d3'),'#/yazilar'],['🤲',tx('t5'),tx('d5'),'#/dualar'],['⭐',tx('t6'),tx('d6'),'#/ozel'],['🕌',tx('t7'),tx('d7'),'#/namaz'],['📝',tx('t9'),tx('d9'),'#/cetele'],['👤',tx('t8'),tx('d8'),'#/men'],['📿',tx('t4'),tx('d4'),'#/zikirmatik'],['📜',tx('t10'),tx('d10'),'#/hadis'],['✨',tx('t11'),tx('d11'),'#/esma'],['🗂️',tx('t12'),tx('d12'),'#/temalar'],['🌙',tx('t13'),tx('d13'),'#/ramazan'],['🧒',tx('t14'),tx('d14'),'#/cocuk'],['🎓',tx('t15'),tx('d15'),'#/tecvid'],['🧎',tx('t16'),tx('d16'),'#/namazrehber'],['🌅',tx('t17'),tx('d17'),'#/zikirler'],['ℹ️',tx('t18'),tx('d18'),'#/kaynak']].forEach(function(x){
-  g.append(h('a',{class:'card tile',href:x[3]},[h('div',{class:'ic'},x[0]),h('b',null,x[1]),h('span',null,x[2])]))});
+ var RUG='<svg viewBox="0 0 160 96"><rect x="34" y="10" width="92" height="66" rx="8" fill="#2f5a46"/><rect x="42" y="18" width="76" height="50" rx="5" fill="none" stroke="#d9bd7b" stroke-width="2"/><path d="M58 68V42a22 22 0 0 1 44 0v26" fill="#3b6f57" stroke="#d9bd7b" stroke-width="2.5"/><circle cx="80" cy="40" r="5" fill="#d9bd7b"/><g stroke="#d9bd7b" stroke-width="2.5" stroke-linecap="round"><path d="M40 80v8M50 80v8M60 80v8M70 80v8M80 80v8M90 80v8M100 80v8M110 80v8M120 80v8"/></g></svg>',QUR='<svg viewBox="0 0 160 96"><path d="M34 84h92M52 84l28-26 28 26" stroke="#8b5a3a" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M80 24c-12-8-28-8-40-4v38c12-4 28-4 40 4z" fill="#2f5a46"/><path d="M80 24c12-8 28-8 40-4v38c-12-4-28-4-40 4z" fill="#3b6f57"/><path d="M48 32c8-2 18-2 26 2M48 42c8-2 18-2 26 2M86 34c8-4 18-4 26-2M86 44c8-4 18-4 26-2" stroke="#d9bd7b" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>',TAS='<svg viewBox="0 0 160 96"><g fill="#556b3d"><circle cx="36" cy="37" r="7"/><circle cx="49" cy="23" r="7"/><circle cx="71" cy="15" r="7"/><circle cx="95" cy="16" r="7"/><circle cx="115" cy="26" r="7"/><circle cx="125" cy="41" r="7"/><circle cx="122" cy="56" r="7"/><circle cx="106" cy="68" r="7"/><circle cx="82" cy="73" r="7"/><circle cx="59" cy="70" r="7"/><circle cx="41" cy="59" r="7"/></g><path d="M118 62l10 20-4 4-12-18z" fill="#2f5a46"/><circle cx="120" cy="60" r="5" fill="#c9a35a"/></svg>',QZ='<svg viewBox="0 0 160 96"><rect x="48" y="14" width="46" height="66" rx="6" fill="#4a7a62" transform="rotate(-10 70 48)"/><rect x="62" y="12" width="52" height="70" rx="6" fill="#fff" stroke="#c9a35a" stroke-width="2.5"/><text x="88" y="62" text-anchor="middle" font-size="40" font-weight="800" fill="#2a4a3c" font-family="Inter,sans-serif">؟</text></svg>',DU='<svg viewBox="0 0 160 96"><path d="M80 12a14 14 0 1 0 8 25 11 11 0 1 1 0-25z" fill="#c9a35a" transform="translate(0 -2)"/><path d="M36 54c8-6 18-8 30-2 6 3 10 8 14 16 4-8 8-13 14-16 12-6 22-4 30 2-2 18-18 30-44 30S38 72 36 54z" fill="#4a7a62"/><path d="M52 62c10 0 18 4 28 14M108 62c-10 0-18 4-28 14" stroke="#cfe3d6" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".7"/></svg>',MOS='<svg viewBox="0 0 200 130" preserveAspectRatio="xMaxYMax slice"><path d="M0 130V74l30-30 26 24 28-34 32 36 26-26 28 30 30-24v80z" fill="#cdd8d2"/><path d="M0 130V92l34-24 30 22 34-30 40 34 30-22 32 22v36z" fill="#a9bdb2" opacity=".7"/><g fill="#fffdf6" stroke="#cfd6cc"><rect x="118" y="30" width="9" height="76" rx="3"/><rect x="176" y="30" width="9" height="76" rx="3"/><path d="M122 26l4-10 4 10zM180 26l4-10 4 10z" fill="#c9a35a" stroke="none"/><path d="M130 106V82a22 22 0 0 1 44 0v24z"/><path d="M134 82a18 18 0 0 1 36 0z" fill="#e7ece4"/><rect x="108" y="106" width="86" height="24"/></g><path d="M148 62v-9" stroke="#c9a35a" stroke-width="2"/><circle cx="152" cy="50" r="3" fill="#c9a35a"/><path d="M142 130v-14a10 10 0 0 1 20 0v14z" fill="#b9c8bf"/></svg>';
+ var n0=nextPrayer(),hero=h('div',{class:'hero'}),Lc=curLoc();
+ app.append(h('div',{class:'hello'},'Ассаламу алейкум!'),h('div',{class:'big'},'Бүгүн эмнени окуйбуз?'));
+ function tk(){var n2=nextPrayer();hero.innerHTML='';hero.append(h('div',{class:'tx'},[h('small',null,'Кийинки намаз'),h('div',{class:'nm2'},tx('pt_n')[n2.k]+' '+fmtH(n2.h)),h('div',{class:'tt'},cdTxt(n2.ms)),h('div',{style:'color:var(--mut);font-size:13px;margin-top:4px'},hijri()),h('a',{class:'btn',href:'#/namaz'},'Убакыттарды көрсөт')]));var d=h('div');d.innerHTML=MOS;hero.append(d.firstChild)}
+ tk();TM.push(setInterval(tk,1000));app.append(hero);
+ app.append(searchBox());
+ app.append(h('h2',null,'Негизги бөлүмдөр'));
+ var tl=h('div',{class:'tiles'});
+ [[RUG,'Намаз','Кадам сайын үйрөнүү','#/namazrehber'],[QUR,'Куран','Окуу жана угуу','#/kuran'],[TAS,'Зикирматик','Зикир эсептегич','#/zikirmatik'],[DU,'Дубалар','Сапарда, үйдө, күн сайын','#/dualar']].forEach(function(x){var a=h('a',{class:'tl',href:x[3]},[h('b',null,x[1]),h('span',null,x[2]),h('i',null,'›')]);var d=h('div');d.innerHTML=x[0];a.insertBefore(d.firstChild,a.firstChild);tl.append(a)});
+ app.append(tl);
+ app.append(h('h2',null,'Күн сайын сиз менен'));
+ var KB='<svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="1"/><path d="M4 11h16M10 20v-5h4v5M8 7V5M16 7V5"/></svg>',KT='<svg viewBox="0 0 24 24"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg>';
+ [[KB,'Кыбла','Каабага карай багыт','#/namaz'],[KT,'Китептер','Окуу жана жүктөп алуу','#/kitaplar'],[DU.replace(/.*/,'<svg viewBox="0 0 24 24"><path d="M12 3l2.4 5 5.6.8-4 4 1 5.6L12 15.6 7 18.4l1-5.6-4-4 5.6-.8z"/></svg>'),'99 ысым','Аллахтын кооз ысымдары','#/esma']].forEach(function(x){var a=h('a',{class:'lrow',href:x[3]},[h('div',null),h('div',null,[h('b',null,x[1]),h('span',null,x[2])]),h('i',null,'›')]);a.firstChild.outerHTML=x[0];app.append(a)});
+ var hp=h('div',{id:'hp'});app.append(hp);homePanel(hp);
+ app.append(h('h2',null,'Бардык бөлүмдөр'));
+ var g=h('div',{class:'more'});
+ [['📚',tx('t1'),'#/kitaplar'],['⭐',tx('t6'),'#/ozel'],['📿',tx('t4'),'#/zikirmatik'],['📜',tx('t10'),'#/hadis'],['🗂️',tx('t12'),'#/temalar'],['🌙',tx('t13'),'#/ramazan'],['🧒',tx('t14'),'#/cocuk'],['🎓',tx('t15'),'#/tecvid'],['🌅',tx('t17'),'#/zikirler'],['ℹ️',tx('t18'),'#/kaynak']].forEach(function(x){g.append(h('a',{href:x[2]},[h('span',null,x[0]),x[1]]))});
  app.append(g);
  load('posts').then(function(P){if(!P.length)return;app.append(h('h2',null,tx('recent')));P.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,3).forEach(function(p){app.append(postCard(p))})})}
 /* ---------- books ---------- */
@@ -674,7 +722,7 @@ function ara(q){q=decodeURIComponent(q||'').trim();app.innerHTML='';app.append(h
    out.innerHTML='';sec(tx('s_q')+' · '+tx('sura'),su);sec(tx('s_q'),qr);sec(tx('s_t'),th);sec(tx('s_n'),names);sec(tx('s_hd'),had);sec(tx('s_d'),duas);sec(tx('s_b'),bk);
    if(!out.children.length)out.append(h('div',{class:'empty'},tx('s_none')))})})}
 var R={ibadet:ibadet,kutuphane:kutuphane,ara:ara,daha:daha,kaynak:kaynak,tecvid:tecvid,namazrehber:namazrehber,zikirler:zikirler,hadis:hadis,esma:esma,temalar:temalar,ramazan:ramazan,cocuk:cocuk,cetele:cetele,namaz:namaz,men:men,'':home,kitaplar:books,dinle:listen,yazilar:posts,zikirmatik:zikir,dualar:duas,ozel:ozel,kuran:function(n,a){n?quranSura(n,a):quranList()}};
-function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];if(['dinle','yazilar','cetele','men'].indexOf(r)>-1){location.replace('#/');return}qStop();clrTM();(R[r]||home)(pp[1],pp[2]);var MAP={kuran:'kuran',temalar:'kuran',tecvid:'kuran',dualar:'ibadet',ozel:'ibadet',zikirler:'ibadet',zikirmatik:'ibadet',namaz:'ibadet',namazrehber:'ibadet',ramazan:'ibadet',cetele:'ibadet',ibadet:'ibadet',kitaplar:'kutuphane',dinle:'kutuphane',yazilar:'kutuphane',hadis:'kutuphane',esma:'kutuphane',cocuk:'kutuphane',kaynak:'kutuphane',kutuphane:'kutuphane',men:'men'},nr=MAP[r]||'';document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===nr)});if(r!=='kuran')window.scrollTo(0,0)}
+function route(){var pp=(location.hash.replace(/^#\/?/,'')||'').split('/'),r=pp[0];if(['dinle','yazilar','cetele','men'].indexOf(r)>-1){location.replace('#/');return}qStop();clrTM();(R[r]||home)(pp[1],pp[2]);var MAP={kuran:'kuran',temalar:'kuran',tecvid:'kuran',dualar:'ibadet',ozel:'ibadet',zikirler:'ibadet',zikirmatik:'ibadet',namaz:'namaz',namazrehber:'namaz',ramazan:'ibadet',cetele:'ibadet',ibadet:'ibadet',kitaplar:'kutuphane',dinle:'kutuphane',yazilar:'kutuphane',hadis:'kutuphane',esma:'kutuphane',cocuk:'kutuphane',kaynak:'kutuphane',kutuphane:'kutuphane',men:'men'},nr=MAP[r]||'';document.querySelectorAll('#nav a').forEach(function(a){a.classList.toggle('on',a.dataset.r===nr)});if(r!=='kuran')window.scrollTo(0,0)}
 addEventListener('hashchange',route);
 $('#lg').style.display='none';$('#lg').onclick=function(){return;lang=lang==='tr'?'kg':'tr';try{localStorage.setItem('lang',lang)}catch(e){}applyLang();route()};
 function rpUp(){var a=$('#rp');a.href=srcLink();a.textContent=tx('rep')}addEventListener('hashchange',rpUp);var _al=applyLang;applyLang=function(){_al();rpUp()};applyLang();route();
